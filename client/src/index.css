@@ -1,0 +1,121 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+   Design tokens — every value below was MEASURED from the reference.
+   Sources: docs/reference/REFERENCE_ANALYSIS.md §14 (type), §15 (colour),
+            §16 (motion); docs/architecture/TECHNICAL_ARCHITECTURE.md §8.
+
+   Tailwind v4 is CSS-first: tokens live here in @theme rather than in a
+   tailwind.config.js. See README "Deviations from the architecture doc".
+--------------------------------------------------------------------------- */
+
+@theme {
+  /* -- Colour ------------------------------------------------------------ */
+  /* Primary text. Measured on 309 nodes. Contrast on white ~15.9:1 (AAA). */
+  --color-ink: #222222;
+  /* Secondary text. Measured on 113 nodes. ~5.25:1 — passes AA, fails AAA. */
+  --color-muted: #6c6c6c;
+  /* Tertiary. ~3.36:1 — FAILS AA for body text.
+     Restricted to large text / non-text UI. See IMPLEMENTATION_PLAN M17. */
+  --color-subtle: #8c8c8c;
+  --color-disabled: #d1d1d1;
+  --color-line: #dddddd;
+  --color-surface: #f7f7f7;
+  --color-control: #f2f2f2;
+  --color-control-hover: #ebebeb;
+
+  /* Brand. The CTA is a gradient, not a flat colour — see --gradient-cta. */
+  --color-rausch-from: #e61e4d;
+  --color-rausch-mid: #e31c5f;
+  --color-rausch-to: #d70466;
+  --color-rausch-solid: #da1249;
+
+  /* -- Typography -------------------------------------------------------- */
+  --font-sans: 'Inter Variable', -apple-system, BlinkMacSystemFont, Roboto,
+    'Helvetica Neue', sans-serif;
+
+  --text-h1: 26px;
+  --text-h1--line-height: 30px;
+  --text-h1--font-weight: 500;
+
+  --text-section: 22px;
+  --text-section--line-height: 26px;
+  --text-section--letter-spacing: -0.44px;
+  --text-section--font-weight: 500;
+
+  --text-body: 16px;
+  --text-body--line-height: 20px;
+
+  --text-base: 14px;
+  --text-base--line-height: 18px;
+
+  --text-micro: 12px;
+  --text-micro--line-height: 16px;
+
+  /* -- Radius ------------------------------------------------------------ */
+  --radius-card: 12px;
+  --radius-gallery: 12px;
+  --radius-map: 20px;
+  --radius-modal: 32px;
+  --radius-pill: 999px;
+
+  /* -- Elevation --------------------------------------------------------- */
+  --shadow-card: 0 6px 16px rgba(0, 0, 0, 0.12);
+  --shadow-modal: 0 8px 28px rgba(0, 0, 0, 0.28);
+  --shadow-pop: 0 6px 20px rgba(0, 0, 0, 0.2);
+  --shadow-menu: 0 2px 16px rgba(0, 0, 0, 0.12);
+  --shadow-pill-hover: 0 0 0 1px rgba(0, 0, 0, 0.02), 0 8px 24px rgba(0, 0, 0, 0.1);
+
+  /* -- Layout ------------------------------------------------------------ */
+  --container-content: 1120px;
+  --container-main: 653.3px;
+  --container-aside: 372.3px;
+
+  /* -- Motion ------------------------------------------------------------ */
+  /* The reference uses ONE curve sitewide and nothing over 300ms. */
+  --ease-airbnb: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Non-Tailwind constants. Kept as plain custom properties because they are
+   geometry, not utility scales. */
+:root {
+  --header-height: 96px;
+  --sticky-offset: 80px;
+  --content-width: 1120px;
+  --main-column: 653.3px;
+  --aside-column: 372.3px;
+  --column-gutter: 93.4px;
+  --gallery-gap: 8px;
+
+  --gradient-cta: linear-gradient(
+    to right,
+    #e61e4d 0%,
+    #e31c5f 50%,
+    #d70466 100%
+  );
+}
+
+@layer base {
+  body {
+    background-color: #ffffff;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Reference uses no italic face at all (ASSET_INVENTORY §7). */
+}
+
+/* Respect the OS setting. Pairs with IMPLEMENTATION_PLAN M18. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

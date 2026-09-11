@@ -1,0 +1,26 @@
+{
+  "name": "airbnb-clone",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Original desktop-only Airbnb listing page implementation",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "scripts": {
+    "dev": "concurrently -n server,client -c blue,magenta \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:client": "npm run dev --workspace client",
+    "dev:server": "npm run dev --workspace server",
+    "build": "npm run build --workspace client",
+    "start": "npm run start --workspace server",
+    "lint": "eslint .",
+    "test": "npm run test --workspaces --if-present"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
