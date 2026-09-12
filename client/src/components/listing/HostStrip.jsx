@@ -7,11 +7,11 @@ export default function HostStrip({ host }) {
     <>
       <Divider />
       <div className="flex items-center gap-4 py-6">
-        <Avatar src={host.avatarUrl} size={40} />
+        <Avatar src={host.avatarUrl} size={50} />
         <div>
           <p className="text-body font-medium text-ink">Hosted by {host.name}</p>
           <p className="text-base text-muted">
-            {host.monthsHosting} {host.monthsHosting === 1 ? 'month' : 'months'} hosting
+            {host.monthsHosting >= 12 ? `${Math.floor(host.monthsHosting / 12)} ${host.monthsHosting < 24 ? 'year' : 'years'}` : `${host.monthsHosting} ${host.monthsHosting === 1 ? 'month' : 'months'}`} hosting
           </p>
         </div>
       </div>

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-12T15:08:24.411Z",
+  "generatedAt": "2026-09-12T20:53:17.883Z",
   "listings": [
     {
       "id": "listing-001",
@@ -258,7 +258,7 @@
           "room": "Exterior",
           "width": 1440,
           "height": 960,
-          "heroOrder": 4
+          "heroOrder": null
         },
         {
           "id": "p27",
@@ -285,7 +285,7 @@
           "room": "Exterior",
           "width": 1440,
           "height": 960,
-          "heroOrder": null
+          "heroOrder": 4
         },
         {
           "id": "p30",
@@ -1085,42 +1085,42 @@
         {
           "label": "Comfort",
           "count": 6,
-          "emoji": "🛋️"
+          "icon": "sofa"
         },
         {
           "label": "Accuracy",
           "count": 5,
-          "emoji": "✅"
+          "icon": "check-circle"
         },
         {
           "label": "Hot tub",
           "count": 5,
-          "emoji": "🛁"
+          "icon": "bath"
         },
         {
           "label": "Condition",
           "count": 4,
-          "emoji": "🪣"
+          "icon": "wrench"
         },
         {
           "label": "Hospitality",
           "count": 8,
-          "emoji": "🎁"
+          "icon": "gift"
         },
         {
           "label": "Cleanliness",
           "count": 4,
-          "emoji": "🧴"
+          "icon": "spray"
         },
         {
           "label": "Amenities",
           "count": 2,
-          "emoji": "🎂"
+          "icon": "essentials"
         },
         {
           "label": "Location",
           "count": 7,
-          "emoji": "🖼️"
+          "icon": "map"
         }
       ],
       "promo": {

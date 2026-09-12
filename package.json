@@ -17,8 +17,12 @@
     "dev:server": "npm run dev --workspace server",
     "build": "npm run build --workspace client",
     "start": "npm run start --workspace server",
-    "lint": "eslint .",
-    "test": "npm run test --workspaces --if-present"
+    "test": "npm run test --workspaces --if-present",
+    "test:browser": "playwright test",
+    "check": "npm run build && npm test && npm run test:browser",
+    "preview": "node node_modules/vite/bin/vite.js preview --config client/vite.config.js --host 127.0.0.1 --port 5190 --strictPort client",
+    "architecture": "node scripts/render-architecture.mjs",
+    "package:submission": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/package-submission.ps1"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",

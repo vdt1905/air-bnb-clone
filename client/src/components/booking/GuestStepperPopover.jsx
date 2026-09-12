@@ -50,7 +50,7 @@ export default function GuestStepperPopover({ guests, maxGuests, onChange }) {
     >
       {ROWS.map((row, i) => {
         const value = guests[row.key];
-        const atMax = row.key !== 'infants' && totalCounted >= maxGuests;
+        const atMax = row.key === 'infants' ? value >= 5 : totalCounted >= maxGuests;
 
         return (
           <div

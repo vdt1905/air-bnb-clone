@@ -6,6 +6,7 @@ import {
   UserRound, Circle,
   Award, Tag, Flag, CalendarX, Shield, SprayCan, CircleCheck, MessageSquare, Camera, Dumbbell, Keyboard, House,
   Map, Cake, GraduationCap, BadgeCheck, Fan, Tent, DoorOpen, Languages,
+  Sofa, Gift, Wrench,
 } from 'lucide-react';
 
 /**
@@ -81,6 +82,10 @@ const ICONS = {
   gym: Dumbbell,
   keyboard: Keyboard,
   house: House,
+  // review topic pills
+  sofa: Sofa,
+  gift: Gift,
+  wrench: Wrench,
 };
 
 export default function Icon({ name, size = 24, className, strokeWidth = 1.5, filled = false }) {

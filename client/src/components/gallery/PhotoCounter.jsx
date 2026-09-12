@@ -13,7 +13,7 @@ export default function PhotoCounter({ current, total }) {
       <p
         data-testid="lightbox-counter"
         aria-hidden="true"
-        className="text-base text-white"
+        className="text-base text-ink"
       >
         {current} / {total}
       </p>

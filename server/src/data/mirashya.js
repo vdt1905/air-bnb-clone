@@ -3,7 +3,7 @@ import photoManifest from './photos.json' with { type: 'json' };
 // Screenshot content is fixed intentionally: live review counts change over time.
 export function createMirashyaListing(base) {
   const photo = (room, n = 1) => `/images/mirashya/${room}-${n}.jpg`;
-  const hero = [photo('living-room-2',4),photo('living-room-2'),photo('living-room-2',2),photo('bedroom'),photo('exterior',2)];
+  const hero = [photo('living-room-2',4),photo('living-room-2'),photo('living-room-2',2),photo('bedroom'),photo('exterior',5)];
   const amenities = [
     ['Kitchen','kitchen','Cooking and dining'],['Wifi','wifi','Internet and office'],
     ['Dedicated workspace','desk','Internet and office'],['Free parking on premises','car','Parking and facilities'],
@@ -52,7 +52,11 @@ export function createMirashyaListing(base) {
     pricing:{nightlyRate:5699.8,currency:'INR'},
     availability:{blockedDates:['2026-11-18','2026-11-19','2026-11-20','2026-11-21','2026-11-22','2026-11-23','2026-11-24','2026-11-29','2026-11-30'],minNights:2},
     reviews,
-    reviewTags:base.reviewTags.map((t,i)=>({...t,label:t.label==='Pool'?'Hot tub':t.label,emoji:['🛋️','✅','🛁','🪣','🎁','🧴','🎂','🖼️'][i]})),
+    // Icon NAMES, not emoji: the pills render line icons from the shared Icon
+    // component so they inherit --color-ink and the measured stroke weight,
+    // instead of the OS emoji font (which differs per platform and ignores
+    // colour). Order matches base.reviewTags.
+    reviewTags:base.reviewTags.map((t,i)=>({...t,label:t.label==='Pool'?'Hot tub':t.label,icon:['sofa','check-circle','bath','wrench','gift','spray','essentials','map'][i]})),
     ratingBreakdown:{...base.ratingBreakdown,distribution:{5:18,4:1,3:0,2:0,1:0}},
     neighbourhood:{heading:'Neighbourhood highlights',body:'Located in the heart of Candolim, Amor de Goa offers a peaceful stay with easy access to beaches, cafés, and popular attractions.'},
   };

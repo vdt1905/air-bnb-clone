@@ -12,15 +12,15 @@ export default function ShowAllPhotosButton({ onClick }) {
       type="button"
       onClick={onClick}
       data-testid="show-all-photos"
-      className="absolute inline-flex items-center justify-center gap-2 bg-control text-ink motion-control hover:bg-control-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+      className="absolute inline-flex items-center justify-center gap-2 border border-ink bg-white text-ink motion-control hover:bg-control-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
       style={{
         right: '24px',
         bottom: '24px',
-        width: '140.3px',
-        height: '32px',
+        width: '158px',
+        height: '36px',
         padding: '8px 16px',
         borderRadius: '8px',
-        fontSize: '12px',
+        fontSize: '14px',
         lineHeight: '16px',
         fontWeight: 500,
       }}

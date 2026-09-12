@@ -10,6 +10,7 @@ import {
   useHasPrevPhoto,
   useHasNextPhoto,
   useGalleryActions,
+  useGalleryDirection,
 } from '../../store/galleryStore.js';
 import { useListingData } from '../../store/listingStore.js';
 import { MODALS } from '../../constants/modals.js';
@@ -21,7 +22,11 @@ import {useUiActions} from '../../store/uiStore.js';
  *
  * Measured contract (INTERACTION_SPEC.md §3):
  *   - reachable ONLY from a photo inside the Photo Tour
- *   - background black #000, fully opaque, full viewport
+ *   - background: the reference measured #000, but this build uses WHITE by
+ *     product decision, so the viewer matches the Photo Tour it sits over.
+ *     Every control therefore carries ink-on-white contrast, and the two nav
+ *     circles gain a hairline border + shadow that the black ground used to
+ *     provide for free.
  *   - image box inset 96px L/R and 112px T/B, `object-fit: contain`
  *     (the page's only `contain` — everything else is `cover`)
  *   - Close at 40,40 as ✕ + "Close" label, radius 8px
@@ -49,7 +54,7 @@ function NavButton({ direction, onClick }) {
       onClick={onClick}
       aria-label={isNext ? 'Next photo' : 'Previous photo'}
       data-testid={isNext ? 'lightbox-next' : 'lightbox-prev'}
-      className="absolute top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white text-ink motion-icon hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+      className="absolute top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-white text-ink shadow-menu motion-icon hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
       style={isNext ? { right: '32px' } : { left: '32px' }}
     >
       <Icon name={isNext ? 'chevronRight' : 'chevronLeft'} size={12} strokeWidth={3} />
@@ -63,6 +68,20 @@ export default function Lightbox() {
   const isTop = useIsTopModal(MODALS.LIGHTBOX);
   const listing = useListingData();
   const index = useCurrentPhotoIndex();
+  const direction = useGalleryDirection();
+
+  // Photo-change motion: a short directional slide-and-fade on the frame that
+  // holds the image. The frame is NOT re-keyed (see the comment at the <img>),
+  // so the animation is restarted by hand: drop the class, force a reflow,
+  // re-add it. The global prefers-reduced-motion rule collapses it to ~0ms.
+  const frameRef = useRef(null);
+  useEffect(() => {
+    const el = frameRef.current;
+    if (!el) return;
+    el.classList.remove('lightbox-in-next', 'lightbox-in-prev');
+    void el.offsetWidth; // restart the CSS animation
+    el.classList.add(direction === 'prev' ? 'lightbox-in-prev' : 'lightbox-in-next');
+  }, [index, direction]);
   const hasPrev = useHasPrevPhoto();
   const hasNext = useHasNextPhoto();
   const { nextPhoto, prevPhoto } = useGalleryActions();
@@ -101,7 +120,7 @@ export default function Lightbox() {
       id={MODALS.LIGHTBOX}
       label={`Photo ${index + 1} of ${photos.length}`}
       initialFocusRef={containerRef}
-      className="bg-black motion-safe:animate-[fade-in_180ms_cubic-bezier(0.2,0,0,1)]"
+      className="bg-white motion-safe:animate-[fade-in_180ms_cubic-bezier(0.2,0,0,1)]"
     >
       {/* Focus lands on the dialog container, as measured. tabIndex -1 makes
           it programmatically focusable without adding a tab stop. */}
@@ -115,7 +134,7 @@ export default function Lightbox() {
             type="button"
             onClick={close}
             data-testid="lightbox-close"
-            className="inline-flex items-center justify-center gap-2 text-base text-white motion-icon hover:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="inline-flex items-center justify-center gap-2 text-base text-ink motion-icon hover:scale-[1.02] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
             style={{ width: '89px', height: '34px', borderRadius: '8px' }}
           >
             <Icon name="close" size={16} strokeWidth={2} />
@@ -129,7 +148,7 @@ export default function Lightbox() {
               type="button"
               aria-label="Share this photo"
               onClick={e=>openModal(MODALS.SHARE,e.currentTarget)}
-              className="flex h-4 w-4 items-center justify-center rounded-full text-white motion-icon-sm hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+              className="flex h-4 w-4 items-center justify-center rounded-full text-ink motion-icon-sm hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
             >
               <Icon name="share" size={16} strokeWidth={2} />
             </button>
@@ -137,7 +156,7 @@ export default function Lightbox() {
               type="button"
               aria-label="Save this photo"
               onClick={e=>openModal(MODALS.LOGIN,e.currentTarget)}
-              className="flex h-4 w-4 items-center justify-center rounded-full text-white motion-icon-sm hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+              className="flex h-4 w-4 items-center justify-center rounded-full text-ink motion-icon-sm hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
             >
               <Icon name="heart" size={16} strokeWidth={2} />
             </button>
@@ -151,7 +170,7 @@ export default function Lightbox() {
           role="group"
           aria-label={photo.alt}
           data-testid="lightbox-image-region"
-          className="absolute outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+          className="absolute outline-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
           style={{
             left: `${INSET_X}px`,
             right: `${INSET_X}px`,
@@ -161,10 +180,12 @@ export default function Lightbox() {
         >
           {/* No `key` here on purpose: keying by photo id would unmount and
               remount the element on every move, blanking the frame mid-swap
-              during rapid next/previous. Reusing one element plus the neighbour
-              preload above keeps the change instant, which is what the
-              reference does — its photo-change transition is [N], so an
-              invented cross-fade would be the riskier guess. */}
+              during rapid next/previous. One element plus the neighbour preload
+              above keeps the swap seamless; the slide-and-fade is applied to
+              the wrapping frame instead (INTERACTION_SPEC §3 item 7 — the
+              reference's own transition was not captured, so this is a
+              deliberate 240ms choice within the measured motion contract). */}
+          <div ref={frameRef} className="h-full w-full" data-testid="lightbox-frame">
           <img
             src={photo.url}
             alt=""
@@ -176,6 +197,7 @@ export default function Lightbox() {
             className="h-full w-full"
             style={{ objectFit: 'contain', objectPosition: '50% 50%', borderRadius: 0 }}
           />
+          </div>
         </div>
 
         {/* Previous is absent on the first photo — measured, not styling. */}

@@ -164,7 +164,7 @@ export default function BookingCard({ listing }) {
                   className={`flex flex-col items-start text-left motion-control hover:bg-control focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-ink ${
                     i === 1 ? 'border-l border-line' : ''
                   }`}
-                  style={{ width: '160.8px', height: '56px', padding: '26px 12px 10px' }}
+                  style={{ width: '50%', height: '64px', padding: '29px 12px 10px' }}
                 >
                   <span
                     className="absolute text-ink"

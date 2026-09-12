@@ -16,6 +16,7 @@ export default function AmenityItem({ amenity }) {
       </span>
       <span
         className={`text-body ${unavailable ? 'text-muted line-through' : 'text-ink'}`}
+        style={{fontSize:'17px',letterSpacing:'-.2px'}}
       >
         {amenity.label}
         {unavailable && <span className="sr-only"> (unavailable)</span>}

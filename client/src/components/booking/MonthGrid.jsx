@@ -13,7 +13,7 @@ export default function MonthGrid({year,month,checkIn,checkOut,blockedDates,toda
     while(buttons[next]?.disabled)next+=Math.sign(delta);
     buttons[next]?.focus();
   };
-  return <div ref={ref} style={{width:width?`${width}px`:'100%'}} role="group" aria-label={monthLabel(year,month)} onKeyDown={navigate}>
+  return <div ref={ref} style={{width:width?`${width}px`:'100%',minWidth:0}} role="group" aria-label={monthLabel(year,month)} onKeyDown={navigate}>
     <p className="mb-5 text-center text-body font-medium">{monthLabel(year,month)}</p>
     <div className="calendar-days">
       {['S','M','T','W','T','F','S'].map((d,i)=><span key={i} className="pb-3 text-center text-[14px]" aria-hidden="true">{d}</span>)}

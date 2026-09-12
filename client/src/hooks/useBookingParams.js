@@ -16,7 +16,11 @@ const toInt = (value, fallback) => {
 };
 
 const ISO = /^\d{4}-\d{2}-\d{2}$/;
-const readDate = (value) => (ISO.test(value ?? '') ? value : null);
+const readDate = (value) => {
+  if (!ISO.test(value ?? '')) return null;
+  const parsed = new Date(`${value}T00:00:00Z`);
+  return Number.isFinite(parsed.getTime()) && parsed.toISOString().slice(0,10) === value ? value : null;
+};
 
 export function useBookingParams() {
   const [params, setParams] = useSearchParams();
@@ -26,9 +30,9 @@ export function useBookingParams() {
 
   const guests = useMemo(
     () => ({
-      adults: toInt(params.get('adults'), 1),
-      children: toInt(params.get('children'), 0),
-      infants: toInt(params.get('infants'), 0),
+      adults: Math.max(1, Math.min(4, toInt(params.get('adults'), 1))),
+      children: Math.min(4 - Math.max(1, Math.min(4, toInt(params.get('adults'), 1))), toInt(params.get('children'), 0)),
+      infants: Math.min(5, toInt(params.get('infants'), 0)),
     }),
     [params]
   );

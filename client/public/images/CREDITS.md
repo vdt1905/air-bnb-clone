@@ -1,18 +1,21 @@
-# Photo credits
+# Asset provenance
 
-All photography in this project is sourced from **[Pexels](https://www.pexels.com)** under
-the **[Pexels License](https://www.pexels.com/license/)**:
+## Matching Mirashya listing assets
 
-- Free to use for commercial and non-commercial purposes
-- No attribution required (credited here regardless, as good practice)
-- Modification permitted (all files are cropped to 3:2 and re-encoded as WebP)
-- Identifiable people/property may not be used in a way that implies endorsement
+The 43 photographs in `mirashya/`, the green Mirashya host image and the illustrated search icon were obtained from rendered image URLs on the [same public Airbnb listing](https://www.airbnb.co.in/rooms/1599895892448055764), observed on 12 September 2026. They are used to reproduce the property in the user's reference screenshots for this private take-home submission.
 
-No imagery from the reference implementation is used. See
-[ASSET_INVENTORY.md §10](../../../docs/reference/ASSET_INVENTORY.md) — property
-photography is class **D (replace)**.
+- Per-photo source URLs: [asset-manifest.json](../../../docs/reference/asset-manifest.json).
+- Other observed image/font URLs: [observed-assets.json](../../../docs/reference/observed-assets.json).
+- Collection script: [collect-reference-assets.mjs](../../../scripts/collect-reference-assets.mjs).
+- Typeface: Airbnb Cereal variable font, stored at `../fonts/cereal.woff2`; the exact observed source is recorded in the asset observations.
 
-## Delivery
+These third-party assets remain owned by their respective rights holders. Public visibility is not a grant of a general redistribution licence. No deployed application JavaScript or CSS was copied.
+
+## Remaining fixture photography
+
+The earlier project used Pexels photographs for its alternate listing, nearby stays and avatars. Those files are retained and credited below under the [Pexels License](https://www.pexels.com/license/). Some of these fixture images still appear outside the main photo tour.
+
+## Legacy Pexels fixtures
 
 | Asset type | Size | Aspect | Format |
 |---|---|---|---|
@@ -22,7 +25,7 @@ photography is class **D (replace)**.
 Cropping is applied by the Pexels CDN (`fit=crop`) so every master is exactly 3:2,
 matching the measured reference.
 
-## Property photos — `listings/listing-001/`
+## Legacy property photos — `listings/listing-001/`
 
 Files are named `<room-slug>-NN.webp`. Gallery display order puts the **lead photo of each
 room first** (positions 1–9), then the remainder grouped by room — see
@@ -77,21 +80,9 @@ ASSET_INVENTORY.md §3.
 | Reviewer 4 | `guests/guest-004.webp` | 1858175 | https://www.pexels.com/photo/1858175/ |
 | Reviewer 5 | `guests/guest-005.webp` | 2379004 | https://www.pexels.com/photo/2379004/ |
 
-## Not photography
 
-`map/candolim.svg` is an original vector illustration generated for this project, not a
-third-party asset. The logo and all UI icons are likewise original or library-sourced
-(`lucide-react`, ISC licence) — see ASSET_INVENTORY.md §6–7.
+## Vectors and icons
 
-## Re-fetching
+The brand mark was recreated in SVG for reference fidelity. General interface icons use `lucide-react` (ISC licence), with a few original SVG drawings. The location-map backdrop is an original CSS illustration; it is not an interactive third-party map service.
 
-The download script lives outside the repo (it was a one-off). To replace a photo, take
-any Pexels ID and request:
-
-```
-https://images.pexels.com/photos/<ID>/pexels-photo-<ID>.jpeg
-  ?auto=compress&cs=tinysrgb&fit=crop&fm=webp&w=1440&h=960&dpr=1
-```
-
-Then save it over the corresponding filename. Paths are derived in
-`server/src/data/listings.js` from the room slug and index — no other file needs editing.
+The separate production architecture SVG and PNG were generated from original project code in `scripts/render-architecture.mjs`.

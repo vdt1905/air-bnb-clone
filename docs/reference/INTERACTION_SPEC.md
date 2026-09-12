@@ -454,7 +454,7 @@ Locked on open (`overflow: hidden`, `position: fixed`); fully restored on close
 | Trigger | Click a large photo **inside the Photo Tour** — it is not reachable from the listing page directly |
 | URL | Appends **`&modalItem=<photoId>`** (e.g. `…&modalItem=2798062073`) |
 | Dialogs | 2 → **3** — it stacks *over* the tour; the tour is not unmounted |
-| Background | **Black `#000`**, fully opaque, full viewport |
+| Background | **Black `#000`**, fully opaque, full viewport — *this build overrides it to white by product decision; controls are ink-on-white and the nav circles carry a hairline border + shadow. See Lightbox.jsx.* |
 | Image | **1233 × 676.2** at `x = 96, y = 112` — insets 96px L/R, 112px T/B |
 | Fit | **`object-fit: contain`**, `object-position: 50% 50%`, radius 0 |
 | Focus on open | The dialog container (`DIV "Photo tour"`) |
@@ -572,7 +572,7 @@ Do not invent these. Verify before implementing.
 | 4 | Globe / language button | Not clicked **[N]** |
 | 5 | Logo and `Become a host` navigation | Not followed **[N]** |
 | 6 | Modal enter/exit animation | Sampled at steady state only **[N]** |
-| 7 | Lightbox photo-change transition | Instant vs. cross-fade unresolved **[N]** |
+| 7 | Lightbox photo-change transition | Instant vs. cross-fade unresolved **[N]** — implementation decision: a 240ms directional slide-and-fade (32px from the side the photo came from, sitewide curve); see Lightbox.jsx |
 | 8 | Primary CTA hover | No computed change; possible pseudo-element **[M‑neg] / unresolved** |
 | 9 | Photo Tour thumbnail hover | No effect detected **[M‑neg]** |
 | 10 | Map interactions (pan, zoom, marker) | Not exercised **[N]** |
