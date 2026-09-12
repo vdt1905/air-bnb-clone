@@ -1,0 +1,1995 @@
+{
+  "generatedAt": "2026-09-12T15:08:24.411Z",
+  "listings": [
+    {
+      "id": "listing-001",
+      "title": "Romantic Jacuzzi 1BHK Candolim | Mirashya UG10",
+      "propertyType": "Entire serviced apartment",
+      "location": {
+        "city": "Candolim",
+        "region": "Goa",
+        "country": "India",
+        "coordinates": {
+          "lat": 15.5186,
+          "lng": 73.7626
+        }
+      },
+      "capacity": {
+        "guests": 3,
+        "bedrooms": 1,
+        "beds": 1,
+        "bathrooms": 1
+      },
+      "rating": {
+        "value": 4.95,
+        "count": 19,
+        "isNew": false
+      },
+      "photos": [
+        {
+          "id": "p01",
+          "url": "/images/mirashya/living-room-1-1.jpg",
+          "alt": "Living room 1 — view 1",
+          "room": "Living room 1",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p02",
+          "url": "/images/mirashya/living-room-1-2.jpg",
+          "alt": "Living room 1 — view 2",
+          "room": "Living room 1",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p03",
+          "url": "/images/mirashya/living-room-1-3.jpg",
+          "alt": "Living room 1 — view 3",
+          "room": "Living room 1",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p04",
+          "url": "/images/mirashya/living-room-2-1.jpg",
+          "alt": "Living room 2 — view 1",
+          "room": "Living room 2",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": 1
+        },
+        {
+          "id": "p05",
+          "url": "/images/mirashya/living-room-2-2.jpg",
+          "alt": "Living room 2 — view 2",
+          "room": "Living room 2",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": 2
+        },
+        {
+          "id": "p06",
+          "url": "/images/mirashya/living-room-2-3.jpg",
+          "alt": "Living room 2 — view 3",
+          "room": "Living room 2",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p07",
+          "url": "/images/mirashya/living-room-2-4.jpg",
+          "alt": "Living room 2 — view 4",
+          "room": "Living room 2",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": 0
+        },
+        {
+          "id": "p08",
+          "url": "/images/mirashya/living-room-2-5.jpg",
+          "alt": "Living room 2 — view 5",
+          "room": "Living room 2",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p09",
+          "url": "/images/mirashya/living-room-2-6.jpg",
+          "alt": "Living room 2 — view 6",
+          "room": "Living room 2",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p10",
+          "url": "/images/mirashya/living-room-2-7.jpg",
+          "alt": "Living room 2 — view 7",
+          "room": "Living room 2",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p11",
+          "url": "/images/mirashya/full-kitchen-1.jpg",
+          "alt": "Full kitchen — view 1",
+          "room": "Full kitchen",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p12",
+          "url": "/images/mirashya/full-kitchen-2.jpg",
+          "alt": "Full kitchen — view 2",
+          "room": "Full kitchen",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p13",
+          "url": "/images/mirashya/bedroom-1.jpg",
+          "alt": "Bedroom — view 1",
+          "room": "Bedroom",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": 3
+        },
+        {
+          "id": "p14",
+          "url": "/images/mirashya/bedroom-2.jpg",
+          "alt": "Bedroom — view 2",
+          "room": "Bedroom",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p15",
+          "url": "/images/mirashya/bedroom-3.jpg",
+          "alt": "Bedroom — view 3",
+          "room": "Bedroom",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p16",
+          "url": "/images/mirashya/bedroom-4.jpg",
+          "alt": "Bedroom — view 4",
+          "room": "Bedroom",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p17",
+          "url": "/images/mirashya/bedroom-5.jpg",
+          "alt": "Bedroom — view 5",
+          "room": "Bedroom",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p18",
+          "url": "/images/mirashya/bedroom-6.jpg",
+          "alt": "Bedroom — view 6",
+          "room": "Bedroom",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p19",
+          "url": "/images/mirashya/full-bathroom-1.jpg",
+          "alt": "Full bathroom — view 1",
+          "room": "Full bathroom",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p20",
+          "url": "/images/mirashya/gym-1.jpg",
+          "alt": "Gym — view 1",
+          "room": "Gym",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p21",
+          "url": "/images/mirashya/gym-2.jpg",
+          "alt": "Gym — view 2",
+          "room": "Gym",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p22",
+          "url": "/images/mirashya/gym-3.jpg",
+          "alt": "Gym — view 3",
+          "room": "Gym",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p23",
+          "url": "/images/mirashya/gym-4.jpg",
+          "alt": "Gym — view 4",
+          "room": "Gym",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p24",
+          "url": "/images/mirashya/gym-5.jpg",
+          "alt": "Gym — view 5",
+          "room": "Gym",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p25",
+          "url": "/images/mirashya/exterior-1.jpg",
+          "alt": "Exterior — view 1",
+          "room": "Exterior",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p26",
+          "url": "/images/mirashya/exterior-2.jpg",
+          "alt": "Exterior — view 2",
+          "room": "Exterior",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": 4
+        },
+        {
+          "id": "p27",
+          "url": "/images/mirashya/exterior-3.jpg",
+          "alt": "Exterior — view 3",
+          "room": "Exterior",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p28",
+          "url": "/images/mirashya/exterior-4.jpg",
+          "alt": "Exterior — view 4",
+          "room": "Exterior",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p29",
+          "url": "/images/mirashya/exterior-5.jpg",
+          "alt": "Exterior — view 5",
+          "room": "Exterior",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p30",
+          "url": "/images/mirashya/exterior-6.jpg",
+          "alt": "Exterior — view 6",
+          "room": "Exterior",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p31",
+          "url": "/images/mirashya/pool-1.jpg",
+          "alt": "Pool — view 1",
+          "room": "Pool",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p32",
+          "url": "/images/mirashya/pool-2.jpg",
+          "alt": "Pool — view 2",
+          "room": "Pool",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p33",
+          "url": "/images/mirashya/pool-3.jpg",
+          "alt": "Pool — view 3",
+          "room": "Pool",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p34",
+          "url": "/images/mirashya/additional-photos-1.jpg",
+          "alt": "Additional photos — view 1",
+          "room": "Additional photos",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p35",
+          "url": "/images/mirashya/additional-photos-2.jpg",
+          "alt": "Additional photos — view 2",
+          "room": "Additional photos",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p36",
+          "url": "/images/mirashya/additional-photos-3.jpg",
+          "alt": "Additional photos — view 3",
+          "room": "Additional photos",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p37",
+          "url": "/images/mirashya/additional-photos-4.jpg",
+          "alt": "Additional photos — view 4",
+          "room": "Additional photos",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p38",
+          "url": "/images/mirashya/additional-photos-5.jpg",
+          "alt": "Additional photos — view 5",
+          "room": "Additional photos",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p39",
+          "url": "/images/mirashya/additional-photos-6.jpg",
+          "alt": "Additional photos — view 6",
+          "room": "Additional photos",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p40",
+          "url": "/images/mirashya/additional-photos-7.jpg",
+          "alt": "Additional photos — view 7",
+          "room": "Additional photos",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p41",
+          "url": "/images/mirashya/additional-photos-8.jpg",
+          "alt": "Additional photos — view 8",
+          "room": "Additional photos",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p42",
+          "url": "/images/mirashya/additional-photos-9.jpg",
+          "alt": "Additional photos — view 9",
+          "room": "Additional photos",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p43",
+          "url": "/images/mirashya/additional-photos-10.jpg",
+          "alt": "Additional photos — view 10",
+          "room": "Additional photos",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        }
+      ],
+      "photoCount": 43,
+      "roomGroups": [
+        {
+          "name": "Living room 1",
+          "details": [
+            "Sofa",
+            "Air conditioning",
+            "Ceiling fan",
+            "TV"
+          ]
+        },
+        {
+          "name": "Living room 2",
+          "details": [
+            "Ceiling fan",
+            "Hot tub"
+          ]
+        },
+        {
+          "name": "Full kitchen",
+          "details": [
+            "Fridge",
+            "Freezer",
+            "Cooking basics",
+            "Kettle"
+          ]
+        },
+        {
+          "name": "Bedroom",
+          "details": [
+            "1 double bed",
+            "Air conditioning",
+            "Bed linen",
+            "Ceiling fan"
+          ]
+        },
+        {
+          "name": "Full bathroom",
+          "details": [
+            "Hairdryer",
+            "Hot water",
+            "Shampoo",
+            "Shower gel"
+          ]
+        },
+        {
+          "name": "Gym",
+          "details": [
+            "Air conditioning",
+            "Exercise equipment",
+            "Ceiling fan"
+          ]
+        },
+        {
+          "name": "Exterior",
+          "details": []
+        },
+        {
+          "name": "Pool",
+          "details": [
+            "Pool"
+          ]
+        },
+        {
+          "name": "Additional photos",
+          "details": []
+        }
+      ],
+      "host": {
+        "id": "host-001",
+        "name": "Mirashya Homes",
+        "avatarUrl": "/images/mirashya/host.jpg",
+        "monthsHosting": 24,
+        "reviewCount": 1463,
+        "rating": 4.68,
+        "bio": "We host homes designed for comfort and calm. Hosting is more than providing a stay — it is about making you feel welcome and genuinely at home.",
+        "responseRate": 100,
+        "responseTime": "within an hour",
+        "verified": true,
+        "facts": [
+          {
+            "icon": "cake",
+            "text": "Born in the 80s"
+          },
+          {
+            "icon": "school",
+            "text": "Where I went to school: NICMAR Goa"
+          }
+        ],
+        "coHosts": [
+          {
+            "name": "Sharath",
+            "avatarUrl": "/images/guests/guest-001.webp"
+          },
+          {
+            "name": "Aman Dev Pahwa",
+            "avatarUrl": "/images/guests/guest-002.webp"
+          },
+          {
+            "name": "Maria Karen Priyanka",
+            "avatarUrl": "/images/guests/guest-003.webp"
+          },
+          {
+            "name": "Simran",
+            "avatarUrl": "/images/guests/guest-004.webp"
+          },
+          {
+            "name": "Pallavi",
+            "avatarUrl": "/images/guests/guest-005.webp"
+          },
+          {
+            "name": "Sanyukta",
+            "avatarUrl": null
+          },
+          {
+            "name": "Shruti",
+            "avatarUrl": null
+          },
+          {
+            "name": "Amisha",
+            "avatarUrl": null
+          }
+        ]
+      },
+      "highlights": [
+        {
+          "icon": "outdoor",
+          "title": "Outdoor entertainment",
+          "subtitle": "The pool and alfresco dining are great for summer trips."
+        },
+        {
+          "icon": "fan",
+          "title": "Designed for staying cool",
+          "subtitle": "Beat the heat with the A/C and ceiling fan."
+        },
+        {
+          "icon": "door",
+          "title": "Self check-in",
+          "subtitle": "You can check in with the building staff."
+        }
+      ],
+      "description": {
+        "summary": "🌴 Plan Your Relaxing Holiday at Amor De Goa by Mirashya Homes! ✨ Stay in this cozy 1BHK in the heart of Candolim, featuring a private jacuzzi 🛁 for the perfect unwind. Enjoy high-speed WiFi 💻, Smart TV 📺, pet-friendly comfort 🐾, and stylish interiors. Just minutes from Candolim Beach 🏖️, popular cafés, restaurants, and nightlife 🍹, it’s ideal for couples seeking romance, relaxation, and a touch of luxury in North Goa. ❤️🌴",
+        "sections": [
+          {
+            "heading": "The space",
+            "body": "A bright one-bedroom apartment with a private jacuzzi, a comfortable living room, a fully equipped kitchen and a balcony. Relax with a swim in the shared pool, or spend a quiet evening at home after exploring Candolim."
+          },
+          {
+            "heading": "Guest access",
+            "body": "Enjoy the entire apartment and shared access to the gym, parking area and swimming pool."
+          },
+          {
+            "heading": "Other things to note",
+            "body": "Pool hours are 9 am to 7 pm. Please respect the quiet residential community. Early check-in and late checkout are subject to availability. Housekeeping is available between 9 am and 6 pm."
+          }
+        ]
+      },
+      "amenities": [
+        {
+          "id": "amenity-0",
+          "label": "Kitchen",
+          "icon": "kitchen",
+          "category": "Cooking and dining",
+          "available": true
+        },
+        {
+          "id": "amenity-1",
+          "label": "Wifi",
+          "icon": "wifi",
+          "category": "Internet and office",
+          "available": true
+        },
+        {
+          "id": "amenity-2",
+          "label": "Dedicated workspace",
+          "icon": "desk",
+          "category": "Internet and office",
+          "available": true
+        },
+        {
+          "id": "amenity-3",
+          "label": "Free parking on premises",
+          "icon": "car",
+          "category": "Parking and facilities",
+          "available": true
+        },
+        {
+          "id": "amenity-4",
+          "label": "Pool",
+          "icon": "pool",
+          "category": "Parking and facilities",
+          "available": true
+        },
+        {
+          "id": "amenity-5",
+          "label": "Hot tub",
+          "icon": "bath",
+          "category": "Parking and facilities",
+          "available": true
+        },
+        {
+          "id": "amenity-6",
+          "label": "Pets allowed",
+          "icon": "pet",
+          "category": "Services",
+          "available": true
+        },
+        {
+          "id": "amenity-7",
+          "label": "Exterior security cameras on property",
+          "icon": "camera",
+          "category": "Home safety",
+          "available": true
+        },
+        {
+          "id": "amenity-8",
+          "label": "Carbon monoxide alarm",
+          "icon": "alarm",
+          "category": "Not included",
+          "available": false
+        },
+        {
+          "id": "amenity-9",
+          "label": "Smoke alarm",
+          "icon": "alarm",
+          "category": "Not included",
+          "available": false
+        },
+        {
+          "id": "amenity-10",
+          "label": "Hairdryer",
+          "icon": "hairdryer",
+          "category": "Bathroom",
+          "available": true
+        },
+        {
+          "id": "amenity-11",
+          "label": "Shampoo",
+          "icon": "bottle",
+          "category": "Bathroom",
+          "available": true
+        },
+        {
+          "id": "amenity-12",
+          "label": "Hot water",
+          "icon": "droplet",
+          "category": "Bathroom",
+          "available": true
+        },
+        {
+          "id": "amenity-13",
+          "label": "Shower gel",
+          "icon": "bottle",
+          "category": "Bathroom",
+          "available": true
+        },
+        {
+          "id": "amenity-14",
+          "label": "Essentials",
+          "icon": "essentials",
+          "category": "Bedroom and laundry",
+          "available": true
+        },
+        {
+          "id": "amenity-15",
+          "label": "Hangers",
+          "icon": "hanger",
+          "category": "Bedroom and laundry",
+          "available": true
+        },
+        {
+          "id": "amenity-16",
+          "label": "Bed linen",
+          "icon": "bed",
+          "category": "Bedroom and laundry",
+          "available": true
+        },
+        {
+          "id": "amenity-17",
+          "label": "Extra pillows and blankets",
+          "icon": "bed",
+          "category": "Bedroom and laundry",
+          "available": true
+        },
+        {
+          "id": "amenity-18",
+          "label": "Iron",
+          "icon": "iron",
+          "category": "Bedroom and laundry",
+          "available": true
+        },
+        {
+          "id": "amenity-19",
+          "label": "Clothes storage",
+          "icon": "hanger",
+          "category": "Bedroom and laundry",
+          "available": true
+        },
+        {
+          "id": "amenity-20",
+          "label": "TV",
+          "icon": "tv",
+          "category": "Entertainment",
+          "available": true
+        },
+        {
+          "id": "amenity-21",
+          "label": "Exercise equipment",
+          "icon": "gym",
+          "category": "Entertainment",
+          "available": true
+        },
+        {
+          "id": "amenity-22",
+          "label": "Air conditioning",
+          "icon": "snowflake",
+          "category": "Heating and cooling",
+          "available": true
+        },
+        {
+          "id": "amenity-23",
+          "label": "Ceiling fan",
+          "icon": "fan",
+          "category": "Heating and cooling",
+          "available": true
+        },
+        {
+          "id": "amenity-24",
+          "label": "Fridge",
+          "icon": "kitchen",
+          "category": "Cooking and dining",
+          "available": true
+        },
+        {
+          "id": "amenity-25",
+          "label": "Microwave",
+          "icon": "kitchen",
+          "category": "Cooking and dining",
+          "available": true
+        },
+        {
+          "id": "amenity-26",
+          "label": "Cooking basics",
+          "icon": "kitchen",
+          "category": "Cooking and dining",
+          "available": true
+        },
+        {
+          "id": "amenity-27",
+          "label": "Dishes and cutlery",
+          "icon": "kitchen",
+          "category": "Cooking and dining",
+          "available": true
+        },
+        {
+          "id": "amenity-28",
+          "label": "Freezer",
+          "icon": "snowflake",
+          "category": "Cooking and dining",
+          "available": true
+        },
+        {
+          "id": "amenity-29",
+          "label": "Cooker",
+          "icon": "kitchen",
+          "category": "Cooking and dining",
+          "available": true
+        },
+        {
+          "id": "amenity-30",
+          "label": "Kettle",
+          "icon": "kitchen",
+          "category": "Cooking and dining",
+          "available": true
+        },
+        {
+          "id": "amenity-31",
+          "label": "Wine glasses",
+          "icon": "kitchen",
+          "category": "Cooking and dining",
+          "available": true
+        },
+        {
+          "id": "amenity-32",
+          "label": "Toaster",
+          "icon": "kitchen",
+          "category": "Cooking and dining",
+          "available": true
+        },
+        {
+          "id": "amenity-33",
+          "label": "Blender",
+          "icon": "kitchen",
+          "category": "Cooking and dining",
+          "available": true
+        },
+        {
+          "id": "amenity-34",
+          "label": "Dining table",
+          "icon": "desk",
+          "category": "Cooking and dining",
+          "available": true
+        },
+        {
+          "id": "amenity-35",
+          "label": "Private entrance",
+          "icon": "door",
+          "category": "Location features",
+          "available": true
+        },
+        {
+          "id": "amenity-36",
+          "label": "Private patio or balcony",
+          "icon": "balcony",
+          "category": "Outdoor",
+          "available": true
+        },
+        {
+          "id": "amenity-37",
+          "label": "Outdoor furniture",
+          "icon": "desk",
+          "category": "Outdoor",
+          "available": true
+        },
+        {
+          "id": "amenity-38",
+          "label": "Outdoor dining area",
+          "icon": "outdoor",
+          "category": "Outdoor",
+          "available": true
+        },
+        {
+          "id": "amenity-39",
+          "label": "Lift",
+          "icon": "door",
+          "category": "Parking and facilities",
+          "available": true
+        },
+        {
+          "id": "amenity-40",
+          "label": "Gym",
+          "icon": "gym",
+          "category": "Parking and facilities",
+          "available": true
+        },
+        {
+          "id": "amenity-41",
+          "label": "Long-term stays allowed",
+          "icon": "calendarX",
+          "category": "Services",
+          "available": true
+        },
+        {
+          "id": "amenity-42",
+          "label": "Self check-in",
+          "icon": "key",
+          "category": "Services",
+          "available": true
+        },
+        {
+          "id": "amenity-43",
+          "label": "Building staff",
+          "icon": "user",
+          "category": "Services",
+          "available": true
+        },
+        {
+          "id": "amenity-44",
+          "label": "Cleaning available during stay",
+          "icon": "spray",
+          "category": "Services",
+          "available": true
+        },
+        {
+          "id": "amenity-45",
+          "label": "Luggage drop-off allowed",
+          "icon": "essentials",
+          "category": "Services",
+          "available": true
+        },
+        {
+          "id": "amenity-46",
+          "label": "Cot",
+          "icon": "bed",
+          "category": "Family",
+          "available": true
+        },
+        {
+          "id": "amenity-47",
+          "label": "Room-darkening blinds",
+          "icon": "door",
+          "category": "Bedroom and laundry",
+          "available": true
+        },
+        {
+          "id": "amenity-48",
+          "label": "First aid kit",
+          "icon": "essentials",
+          "category": "Home safety",
+          "available": true
+        },
+        {
+          "id": "amenity-49",
+          "label": "Fire extinguisher",
+          "icon": "shield",
+          "category": "Home safety",
+          "available": true
+        }
+      ],
+      "amenityCount": 50,
+      "sleepingArrangements": [
+        {
+          "name": "Bedroom",
+          "beds": [
+            "1 double bed"
+          ],
+          "imageUrl": "/images/mirashya/bedroom-1.jpg"
+        },
+        {
+          "name": "Living room",
+          "beds": [
+            "1 sofa"
+          ],
+          "imageUrl": "/images/mirashya/living-room-1-1.jpg"
+        }
+      ],
+      "pricing": {
+        "nightlyRate": 5699.8,
+        "currency": "INR"
+      },
+      "availability": {
+        "blockedDates": [
+          "2026-11-18",
+          "2026-11-19",
+          "2026-11-20",
+          "2026-11-21",
+          "2026-11-22",
+          "2026-11-23",
+          "2026-11-24",
+          "2026-11-29",
+          "2026-11-30"
+        ],
+        "minNights": 2
+      },
+      "reviews": [
+        {
+          "id": "r1",
+          "author": "Amit",
+          "tenure": "2 months on Airbnb",
+          "dateLabel": "1 week ago",
+          "body": "Very helpful and responsive team. Safe and peaceful stay. loved everything about the property.",
+          "avatarUrl": null,
+          "rating": 5,
+          "date": "2026-05-20"
+        },
+        {
+          "id": "r2",
+          "author": "Aheesh",
+          "tenure": "3 years on Airbnb",
+          "dateLabel": "2 weeks ago",
+          "body": "We had a wonderful stay. The apartment was clean, comfortable, and exactly as shown in the photos. The host was very responsive and helpful throughout our stay. We would definitely recommend this place and would love to stay here again.",
+          "avatarUrl": "/images/guests/guest-001.webp",
+          "rating": 5,
+          "date": "2026-05-20"
+        },
+        {
+          "id": "r3",
+          "author": "Samiksha",
+          "tenure": "8 months on Airbnb",
+          "dateLabel": "May 2026",
+          "body": "the host nitish was really great help",
+          "avatarUrl": "/images/guests/guest-003.webp",
+          "rating": 5,
+          "date": "2026-05-20"
+        },
+        {
+          "id": "r4",
+          "author": "Vedant",
+          "tenure": "4 years on Airbnb",
+          "dateLabel": "May 2026",
+          "body": "We had an amazing stay at this property in Goa! The entire home was spotless and exceptionally well-maintained, making us feel comfortable from the moment we arrived. The cleanliness standards were truly impressive, with every corner of the house looking fresh and pristine. We loved the private jacuzzi and the peaceful location.",
+          "avatarUrl": null,
+          "rating": 5,
+          "date": "2026-05-20"
+        },
+        {
+          "id": "r5",
+          "author": "Vaibhav S",
+          "tenure": "3 years on Airbnb",
+          "dateLabel": "May 2026",
+          "body": "Great great experience living out there , can't expect more , will always look for it in the future and will recommend my friends too.",
+          "avatarUrl": "/images/guests/guest-004.webp",
+          "rating": 5,
+          "date": "2026-05-20"
+        },
+        {
+          "id": "r6",
+          "author": "Mohd",
+          "tenure": "5 years on Airbnb",
+          "dateLabel": "May 2026",
+          "body": "Great place. Exactly as described in the listing.",
+          "avatarUrl": "/images/guests/guest-005.webp",
+          "rating": 5,
+          "date": "2026-05-20"
+        }
+      ],
+      "policies": {
+        "checkIn": "after 2:00 pm",
+        "checkOut": "before 11:00 am",
+        "maxGuests": 4,
+        "cancellation": "Free cancellation before 1 October. Cancel before check-in for a partial refund.",
+        "cancellationDeadline": "2026-10-01",
+        "safety": [
+          "Carbon monoxide alarm not reported",
+          "Smoke alarm not reported",
+          "Not suitable for children and infants"
+        ]
+      },
+      "guestFavourite": true,
+      "ratingBreakdown": {
+        "distribution": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 1,
+          "5": 18
+        },
+        "categories": [
+          {
+            "key": "cleanliness",
+            "label": "Cleanliness",
+            "value": 5,
+            "icon": "spray"
+          },
+          {
+            "key": "accuracy",
+            "label": "Accuracy",
+            "value": 5,
+            "icon": "check-circle"
+          },
+          {
+            "key": "checkin",
+            "label": "Check-in",
+            "value": 5,
+            "icon": "key"
+          },
+          {
+            "key": "communication",
+            "label": "Communication",
+            "value": 5,
+            "icon": "message"
+          },
+          {
+            "key": "location",
+            "label": "Location",
+            "value": 4.8,
+            "icon": "map"
+          },
+          {
+            "key": "value",
+            "label": "Value",
+            "value": 4.8,
+            "icon": "tag"
+          }
+        ]
+      },
+      "reviewTags": [
+        {
+          "label": "Comfort",
+          "count": 6,
+          "emoji": "🛋️"
+        },
+        {
+          "label": "Accuracy",
+          "count": 5,
+          "emoji": "✅"
+        },
+        {
+          "label": "Hot tub",
+          "count": 5,
+          "emoji": "🛁"
+        },
+        {
+          "label": "Condition",
+          "count": 4,
+          "emoji": "🪣"
+        },
+        {
+          "label": "Hospitality",
+          "count": 8,
+          "emoji": "🎁"
+        },
+        {
+          "label": "Cleanliness",
+          "count": 4,
+          "emoji": "🧴"
+        },
+        {
+          "label": "Amenities",
+          "count": 2,
+          "emoji": "🎂"
+        },
+        {
+          "label": "Location",
+          "count": 7,
+          "emoji": "🖼️"
+        }
+      ],
+      "promo": {
+        "text": "Get 10% off your next stay.",
+        "linkLabel": "Terms apply",
+        "cta": "Claim"
+      },
+      "translated": true,
+      "neighbourhood": {
+        "heading": "Neighbourhood highlights",
+        "body": "Located in the heart of Candolim, Amor de Goa offers a peaceful stay with easy access to beaches, cafés, and popular attractions."
+      },
+      "nearbyStays": [
+        {
+          "id": "n1",
+          "title": "Beautiful studio with a view to die for",
+          "price": 23600,
+          "rating": 4.91,
+          "imageUrl": "/images/listings/listing-001/living-room-02.webp"
+        },
+        {
+          "id": "n2",
+          "title": "NAQAB — 1BHK with private pool",
+          "price": 42218,
+          "rating": 4.95,
+          "imageUrl": "/images/listings/listing-001/living-room-03.webp"
+        },
+        {
+          "id": "n3",
+          "title": "Greentique luxury flat with plunge pool, Calangute",
+          "price": 44506,
+          "rating": 4.94,
+          "imageUrl": "/images/listings/listing-001/living-room-04.webp"
+        },
+        {
+          "id": "n4",
+          "title": "The Tropical Studio | 5 mins to beach",
+          "price": 22824,
+          "rating": 4.96,
+          "imageUrl": "/images/listings/listing-001/bedroom-1-02.webp"
+        },
+        {
+          "id": "n5",
+          "title": "Luxury Casa Bella 1BHK with plunge pool, Calangute",
+          "price": 39942,
+          "rating": 4.95,
+          "imageUrl": "/images/listings/listing-001/living-room-05.webp"
+        },
+        {
+          "id": "n6",
+          "title": "Sunset loft near Baga",
+          "price": 31200,
+          "rating": 4.89,
+          "imageUrl": "/images/listings/listing-001/bedroom-2-02.webp"
+        },
+        {
+          "id": "n7",
+          "title": "Garden apartment, Sinquerim",
+          "price": 27450,
+          "rating": 4.92,
+          "imageUrl": "/images/listings/listing-001/dining-area-02.webp"
+        }
+      ]
+    },
+    {
+      "id": "listing-002",
+      "title": "Garden Studio with Balcony, Quiet Lane in Candolim",
+      "propertyType": "Entire serviced apartment",
+      "location": {
+        "city": "Candolim",
+        "region": "Goa",
+        "country": "India",
+        "coordinates": {
+          "lat": 15.5186,
+          "lng": 73.7626
+        }
+      },
+      "capacity": {
+        "guests": 2,
+        "bedrooms": 1,
+        "beds": 1,
+        "bathrooms": 1
+      },
+      "rating": {
+        "value": null,
+        "count": 1,
+        "isNew": true
+      },
+      "photos": [
+        {
+          "id": "p01",
+          "url": "/images/listings/listing-001/living-room-01.webp",
+          "alt": "Living room — view 1",
+          "room": "Living room",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p02",
+          "url": "/images/listings/listing-001/full-kitchen-01.webp",
+          "alt": "Full kitchen — view 1",
+          "room": "Full kitchen",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p03",
+          "url": "/images/listings/listing-001/dining-area-01.webp",
+          "alt": "Dining area — view 1",
+          "room": "Dining area",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p04",
+          "url": "/images/listings/listing-001/bedroom-1-01.webp",
+          "alt": "Bedroom 1 — view 1",
+          "room": "Bedroom 1",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p05",
+          "url": "/images/listings/listing-001/bedroom-2-01.webp",
+          "alt": "Bedroom 2 — view 1",
+          "room": "Bedroom 2",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p06",
+          "url": "/images/listings/listing-001/full-bathroom-1-01.webp",
+          "alt": "Full bathroom 1 — view 1",
+          "room": "Full bathroom 1",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p07",
+          "url": "/images/listings/listing-001/full-bathroom-2-01.webp",
+          "alt": "Full bathroom 2 — view 1",
+          "room": "Full bathroom 2",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p08",
+          "url": "/images/listings/listing-001/exterior-01.webp",
+          "alt": "Exterior — view 1",
+          "room": "Exterior",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p09",
+          "url": "/images/listings/listing-001/pool-01.webp",
+          "alt": "Pool — view 1",
+          "room": "Pool",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p10",
+          "url": "/images/listings/listing-001/living-room-02.webp",
+          "alt": "Living room — view 2",
+          "room": "Living room",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p11",
+          "url": "/images/listings/listing-001/living-room-03.webp",
+          "alt": "Living room — view 3",
+          "room": "Living room",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p12",
+          "url": "/images/listings/listing-001/living-room-04.webp",
+          "alt": "Living room — view 4",
+          "room": "Living room",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p13",
+          "url": "/images/listings/listing-001/living-room-05.webp",
+          "alt": "Living room — view 5",
+          "room": "Living room",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p14",
+          "url": "/images/listings/listing-001/full-kitchen-02.webp",
+          "alt": "Full kitchen — view 2",
+          "room": "Full kitchen",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p15",
+          "url": "/images/listings/listing-001/full-kitchen-03.webp",
+          "alt": "Full kitchen — view 3",
+          "room": "Full kitchen",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p16",
+          "url": "/images/listings/listing-001/full-kitchen-04.webp",
+          "alt": "Full kitchen — view 4",
+          "room": "Full kitchen",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p17",
+          "url": "/images/listings/listing-001/dining-area-02.webp",
+          "alt": "Dining area — view 2",
+          "room": "Dining area",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p18",
+          "url": "/images/listings/listing-001/dining-area-03.webp",
+          "alt": "Dining area — view 3",
+          "room": "Dining area",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p19",
+          "url": "/images/listings/listing-001/bedroom-1-02.webp",
+          "alt": "Bedroom 1 — view 2",
+          "room": "Bedroom 1",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p20",
+          "url": "/images/listings/listing-001/bedroom-1-03.webp",
+          "alt": "Bedroom 1 — view 3",
+          "room": "Bedroom 1",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p21",
+          "url": "/images/listings/listing-001/bedroom-1-04.webp",
+          "alt": "Bedroom 1 — view 4",
+          "room": "Bedroom 1",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p22",
+          "url": "/images/listings/listing-001/bedroom-1-05.webp",
+          "alt": "Bedroom 1 — view 5",
+          "room": "Bedroom 1",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p23",
+          "url": "/images/listings/listing-001/bedroom-2-02.webp",
+          "alt": "Bedroom 2 — view 2",
+          "room": "Bedroom 2",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p24",
+          "url": "/images/listings/listing-001/bedroom-2-03.webp",
+          "alt": "Bedroom 2 — view 3",
+          "room": "Bedroom 2",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p25",
+          "url": "/images/listings/listing-001/bedroom-2-04.webp",
+          "alt": "Bedroom 2 — view 4",
+          "room": "Bedroom 2",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p26",
+          "url": "/images/listings/listing-001/full-bathroom-1-02.webp",
+          "alt": "Full bathroom 1 — view 2",
+          "room": "Full bathroom 1",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p27",
+          "url": "/images/listings/listing-001/full-bathroom-1-03.webp",
+          "alt": "Full bathroom 1 — view 3",
+          "room": "Full bathroom 1",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p28",
+          "url": "/images/listings/listing-001/full-bathroom-2-02.webp",
+          "alt": "Full bathroom 2 — view 2",
+          "room": "Full bathroom 2",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p29",
+          "url": "/images/listings/listing-001/full-bathroom-2-03.webp",
+          "alt": "Full bathroom 2 — view 3",
+          "room": "Full bathroom 2",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p30",
+          "url": "/images/listings/listing-001/exterior-02.webp",
+          "alt": "Exterior — view 2",
+          "room": "Exterior",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p31",
+          "url": "/images/listings/listing-001/exterior-03.webp",
+          "alt": "Exterior — view 3",
+          "room": "Exterior",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p32",
+          "url": "/images/listings/listing-001/exterior-04.webp",
+          "alt": "Exterior — view 4",
+          "room": "Exterior",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p33",
+          "url": "/images/listings/listing-001/pool-02.webp",
+          "alt": "Pool — view 2",
+          "room": "Pool",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        },
+        {
+          "id": "p34",
+          "url": "/images/listings/listing-001/pool-03.webp",
+          "alt": "Pool — view 3",
+          "room": "Pool",
+          "width": 1440,
+          "height": 960,
+          "heroOrder": null
+        }
+      ],
+      "photoCount": 34,
+      "roomGroups": [
+        {
+          "name": "Living room",
+          "details": [
+            "Air conditioning",
+            "TV"
+          ]
+        },
+        {
+          "name": "Full kitchen",
+          "details": [
+            "Induction hob",
+            "Refrigerator"
+          ]
+        },
+        {
+          "name": "Dining area",
+          "details": [
+            "Seats 6"
+          ]
+        },
+        {
+          "name": "Bedroom 1",
+          "details": [
+            "1 king bed"
+          ]
+        },
+        {
+          "name": "Bedroom 2",
+          "details": [
+            "1 king bed"
+          ]
+        },
+        {
+          "name": "Full bathroom 1",
+          "details": [
+            "Hot water",
+            "Shower"
+          ]
+        },
+        {
+          "name": "Full bathroom 2",
+          "details": [
+            "Hot water"
+          ]
+        },
+        {
+          "name": "Exterior",
+          "details": [
+            "Balcony"
+          ]
+        },
+        {
+          "name": "Pool",
+          "details": [
+            "Shared outdoor pool"
+          ]
+        }
+      ],
+      "host": {
+        "id": "host-002",
+        "name": "Arjun",
+        "avatarUrl": "/images/hosts/host-002.webp",
+        "monthsHosting": 2,
+        "reviewCount": 1,
+        "rating": null,
+        "bio": "We host homes designed for comfort and calm. Hosting is more than providing a stay — it is about making you feel welcome and genuinely at home.",
+        "responseRate": 100,
+        "responseTime": "within an hour",
+        "verified": true,
+        "facts": [
+          {
+            "icon": "cake",
+            "text": "Born in the 80s"
+          },
+          {
+            "icon": "school",
+            "text": "Where I went to school: NICMAR Goa"
+          }
+        ],
+        "coHosts": [
+          {
+            "name": "Sharath",
+            "avatarUrl": "/images/guests/guest-001.webp"
+          },
+          {
+            "name": "Aman Dev Pahwa",
+            "avatarUrl": "/images/guests/guest-002.webp"
+          },
+          {
+            "name": "Maria Karen Priyanka",
+            "avatarUrl": "/images/guests/guest-003.webp"
+          },
+          {
+            "name": "Simran",
+            "avatarUrl": "/images/guests/guest-004.webp"
+          },
+          {
+            "name": "Pallavi",
+            "avatarUrl": "/images/guests/guest-005.webp"
+          },
+          {
+            "name": "Sanyukta",
+            "avatarUrl": null
+          },
+          {
+            "name": "Shruti",
+            "avatarUrl": null
+          },
+          {
+            "name": "Amisha",
+            "avatarUrl": null
+          }
+        ]
+      },
+      "highlights": [
+        {
+          "icon": "door",
+          "title": "Self check-in",
+          "subtitle": "You can check in with the building staff."
+        },
+        {
+          "icon": "outdoor",
+          "title": "Outdoor entertainment",
+          "subtitle": "The pool and alfresco dining are great for summer trips."
+        },
+        {
+          "icon": "fan",
+          "title": "Designed for staying cool",
+          "subtitle": "Beat the heat with the A/C and ceiling fan."
+        }
+      ],
+      "description": {
+        "summary": "Wake up to the sound of the Arabian Sea just a few minutes from your door. This bright two-bedroom apartment sits on a quiet lane in Candolim, close enough to walk to the beach shacks but far enough back that evenings stay peaceful. The living room opens onto a balcony that catches the afternoon breeze, and the kitchen is fully equipped for anything from morning coffee to a full dinner for six. Both bedrooms have king beds, blackout curtains and their own bathrooms with hot water around the clock. Guests share a clean outdoor pool with the rest of the building, which is rarely busy outside of December. The apartment is on the third floor with lift access, and building staff are on site to let you in whenever you arrive. Fresh linen, towels and basic toiletries are provided, along with fast wifi that holds up for video calls if you are working while you travel. Parking is free on the premises and there is a supermarket two minutes away on foot.",
+        "sections": [
+          {
+            "heading": "The space",
+            "body": "Two king bedrooms, two full bathrooms, an open-plan living and dining area, and a balcony overlooking the garden. Roughly 1,100 square feet on the third floor with lift access."
+          },
+          {
+            "heading": "Guest access",
+            "body": "Guests have the entire apartment plus shared access to the building pool and garden. Building staff can assist with luggage and check-in at any hour."
+          },
+          {
+            "heading": "The neighbourhood",
+            "body": "Candolim Beach is a nine-minute walk. Restaurants, pharmacies and a supermarket are all within a few hundred metres. Fort Aguada is a fifteen-minute drive."
+          }
+        ]
+      },
+      "amenities": [
+        {
+          "id": "kitchen",
+          "label": "Kitchen",
+          "icon": "kitchen",
+          "category": "Cooking and dining",
+          "available": true
+        },
+        {
+          "id": "wifi",
+          "label": "Wifi",
+          "icon": "wifi",
+          "category": "Internet and office",
+          "available": true
+        },
+        {
+          "id": "parking",
+          "label": "Free parking on premises",
+          "icon": "car",
+          "category": "Parking and facilities",
+          "available": true
+        },
+        {
+          "id": "pool",
+          "label": "Pool",
+          "icon": "pool",
+          "category": "Parking and facilities",
+          "available": true
+        },
+        {
+          "id": "pets",
+          "label": "Pets allowed",
+          "icon": "pet",
+          "category": "Property features",
+          "available": true
+        },
+        {
+          "id": "tv",
+          "label": "TV",
+          "icon": "tv",
+          "category": "Entertainment",
+          "available": true
+        },
+        {
+          "id": "washer",
+          "label": "Washing machine",
+          "icon": "washer",
+          "category": "Bedroom and laundry",
+          "available": true
+        },
+        {
+          "id": "aircon",
+          "label": "Air conditioning",
+          "icon": "snowflake",
+          "category": "Heating and cooling",
+          "available": true
+        },
+        {
+          "id": "co-alarm",
+          "label": "Carbon monoxide alarm",
+          "icon": "alarm",
+          "category": "Home safety",
+          "available": false
+        },
+        {
+          "id": "smoke-alarm",
+          "label": "Smoke alarm",
+          "icon": "alarm",
+          "category": "Home safety",
+          "available": false
+        },
+        {
+          "id": "hot-water",
+          "label": "Hot water",
+          "icon": "droplet",
+          "category": "Bathroom",
+          "available": true
+        },
+        {
+          "id": "hairdryer",
+          "label": "Hairdryer",
+          "icon": "hairdryer",
+          "category": "Bathroom",
+          "available": true
+        },
+        {
+          "id": "shampoo",
+          "label": "Shampoo",
+          "icon": "bottle",
+          "category": "Bathroom",
+          "available": true
+        },
+        {
+          "id": "essentials",
+          "label": "Essentials",
+          "icon": "essentials",
+          "category": "Bedroom and laundry",
+          "available": true
+        },
+        {
+          "id": "hangers",
+          "label": "Hangers",
+          "icon": "hanger",
+          "category": "Bedroom and laundry",
+          "available": true
+        },
+        {
+          "id": "iron",
+          "label": "Iron",
+          "icon": "iron",
+          "category": "Bedroom and laundry",
+          "available": true
+        },
+        {
+          "id": "workspace",
+          "label": "Dedicated workspace",
+          "icon": "desk",
+          "category": "Internet and office",
+          "available": true
+        },
+        {
+          "id": "balcony",
+          "label": "Balcony",
+          "icon": "balcony",
+          "category": "Property features",
+          "available": true
+        },
+        {
+          "id": "heating",
+          "label": "Heating",
+          "icon": "heat",
+          "category": "Heating and cooling",
+          "available": false
+        }
+      ],
+      "amenityCount": 19,
+      "sleepingArrangements": [
+        {
+          "name": "Bedroom 1",
+          "beds": [
+            "1 queen bed"
+          ],
+          "imageUrl": "/images/listings/listing-001/bedroom-1-01.webp"
+        }
+      ],
+      "pricing": {
+        "nightlyRate": 4200,
+        "currency": "INR"
+      },
+      "availability": {
+        "blockedDates": [
+          "2026-11-01",
+          "2026-11-02",
+          "2026-11-03",
+          "2026-11-04"
+        ],
+        "minNights": 1
+      },
+      "reviews": [
+        {
+          "id": "r1",
+          "author": "Nikhil",
+          "avatarUrl": "/images/guests/guest-005.webp",
+          "rating": 5,
+          "date": "2026-09-09",
+          "body": "Lovely little studio and a very responsive host. Everything was clean and exactly as pictured."
+        }
+      ],
+      "policies": {
+        "checkIn": "after 2:00 pm",
+        "checkOut": "before 11:00 am",
+        "maxGuests": 4,
+        "cancellation": "Free cancellation before 1 October. Cancel before check-in for a partial refund.",
+        "cancellationDeadline": "2026-10-01",
+        "safety": [
+          "Carbon monoxide alarm not reported",
+          "Smoke alarm not reported",
+          "Not suitable for children and infants"
+        ]
+      },
+      "guestFavourite": true,
+      "ratingBreakdown": {
+        "distribution": {
+          "1": 0,
+          "2": 1,
+          "3": 1,
+          "4": 6,
+          "5": 68
+        },
+        "categories": [
+          {
+            "key": "cleanliness",
+            "label": "Cleanliness",
+            "value": 5,
+            "icon": "spray"
+          },
+          {
+            "key": "accuracy",
+            "label": "Accuracy",
+            "value": 5,
+            "icon": "check-circle"
+          },
+          {
+            "key": "checkin",
+            "label": "Check-in",
+            "value": 5,
+            "icon": "key"
+          },
+          {
+            "key": "communication",
+            "label": "Communication",
+            "value": 5,
+            "icon": "message"
+          },
+          {
+            "key": "location",
+            "label": "Location",
+            "value": 4.8,
+            "icon": "map"
+          },
+          {
+            "key": "value",
+            "label": "Value",
+            "value": 4.8,
+            "icon": "tag"
+          }
+        ]
+      },
+      "reviewTags": [
+        {
+          "label": "Comfort",
+          "count": 6
+        },
+        {
+          "label": "Accuracy",
+          "count": 5
+        },
+        {
+          "label": "Pool",
+          "count": 5
+        },
+        {
+          "label": "Condition",
+          "count": 4
+        },
+        {
+          "label": "Hospitality",
+          "count": 8
+        },
+        {
+          "label": "Cleanliness",
+          "count": 4
+        },
+        {
+          "label": "Amenities",
+          "count": 2
+        },
+        {
+          "label": "Location",
+          "count": 7
+        }
+      ],
+      "promo": {
+        "text": "Get 10% off your next stay.",
+        "linkLabel": "Terms apply",
+        "cta": "Claim"
+      },
+      "translated": true,
+      "neighbourhood": {
+        "heading": "Neighbourhood highlights",
+        "body": "Located in the heart of Candolim, the building offers a peaceful stay with easy access to beaches, cafés and popular attractions."
+      },
+      "nearbyStays": [
+        {
+          "id": "n1",
+          "title": "Beautiful studio with a view to die for",
+          "price": 23600,
+          "rating": 4.91,
+          "imageUrl": "/images/listings/listing-001/living-room-02.webp"
+        },
+        {
+          "id": "n2",
+          "title": "NAQAB — 1BHK with private pool",
+          "price": 42218,
+          "rating": 4.95,
+          "imageUrl": "/images/listings/listing-001/living-room-03.webp"
+        },
+        {
+          "id": "n3",
+          "title": "Greentique luxury flat with plunge pool, Calangute",
+          "price": 44506,
+          "rating": 4.94,
+          "imageUrl": "/images/listings/listing-001/living-room-04.webp"
+        },
+        {
+          "id": "n4",
+          "title": "The Tropical Studio | 5 mins to beach",
+          "price": 22824,
+          "rating": 4.96,
+          "imageUrl": "/images/listings/listing-001/bedroom-1-02.webp"
+        },
+        {
+          "id": "n5",
+          "title": "Luxury Casa Bella 1BHK with plunge pool, Calangute",
+          "price": 39942,
+          "rating": 4.95,
+          "imageUrl": "/images/listings/listing-001/living-room-05.webp"
+        },
+        {
+          "id": "n6",
+          "title": "Sunset loft near Baga",
+          "price": 31200,
+          "rating": 4.89,
+          "imageUrl": "/images/listings/listing-001/bedroom-2-02.webp"
+        },
+        {
+          "id": "n7",
+          "title": "Garden apartment, Sinquerim",
+          "price": 27450,
+          "rating": 4.92,
+          "imageUrl": "/images/listings/listing-001/dining-area-02.webp"
+        }
+      ]
+    }
+  ]
+}

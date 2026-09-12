@@ -37,6 +37,7 @@ function normalize(listing) {
     room: photo.room ?? null,
     width: photo.width ?? 1440,
     height: photo.height ?? 960,
+    heroOrder: photo.heroOrder ?? null,
   }));
 
   const roomGroups = asArray(listing.roomGroups).length
@@ -60,7 +61,14 @@ function normalize(listing) {
     photoCount: photos.length,
     roomGroups,
 
-    host: listing.host,
+    host: listing.host
+      ? {
+          ...listing.host,
+          verified: Boolean(listing.host.verified),
+          facts: asArray(listing.host.facts),
+          coHosts: asArray(listing.host.coHosts),
+        }
+      : null,
     highlights: asArray(listing.highlights),
     description: listing.description,
 
@@ -78,6 +86,16 @@ function normalize(listing) {
 
     reviews: asArray(listing.reviews),
     policies: listing.policies,
+
+    // Sections added to match the reference screenshots. All optional; the
+    // client renders nothing for absent ones.
+    guestFavourite: Boolean(listing.guestFavourite),
+    ratingBreakdown: listing.ratingBreakdown ?? null,
+    reviewTags: asArray(listing.reviewTags),
+    promo: listing.promo ?? null,
+    translated: Boolean(listing.translated),
+    neighbourhood: listing.neighbourhood ?? null,
+    nearbyStays: asArray(listing.nearbyStays),
   };
 }
 

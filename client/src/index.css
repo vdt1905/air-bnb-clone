@@ -31,23 +31,23 @@
   --color-rausch-solid: #da1249;
 
   /* -- Typography -------------------------------------------------------- */
-  --font-sans: 'Inter Variable', -apple-system, BlinkMacSystemFont, Roboto,
+  --font-sans: 'Cereal', -apple-system, BlinkMacSystemFont, Roboto,
     'Helvetica Neue', sans-serif;
 
-  --text-h1: 26px;
-  --text-h1--line-height: 30px;
+  --text-h1: 28px;
+  --text-h1--line-height: 34px;
   --text-h1--font-weight: 500;
 
-  --text-section: 22px;
-  --text-section--line-height: 26px;
+  --text-section: 24px;
+  --text-section--line-height: 30px;
   --text-section--letter-spacing: -0.44px;
   --text-section--font-weight: 500;
 
-  --text-body: 16px;
-  --text-body--line-height: 20px;
+  --text-body: 18px;
+  --text-body--line-height: 26px;
 
-  --text-base: 14px;
-  --text-base--line-height: 18px;
+  --text-base: 16px;
+  --text-base--line-height: 22px;
 
   --text-micro: 12px;
   --text-micro--line-height: 16px;
@@ -79,12 +79,12 @@
 /* Non-Tailwind constants. Kept as plain custom properties because they are
    geometry, not utility scales. */
 :root {
-  --header-height: 96px;
-  --sticky-offset: 80px;
-  --content-width: 1120px;
-  --main-column: 653.3px;
-  --aside-column: 372.3px;
-  --column-gutter: 93.4px;
+  --header-height: 98px;
+  --sticky-offset: 72px;
+  --content-width: min(1236px, calc(100vw - 128px));
+  --main-column: 58.25%;
+  --aside-column: 33.17%;
+  --column-gutter: 8.58%;
   --gallery-gap: 8px;
 
   --gradient-cta: linear-gradient(
@@ -94,6 +94,70 @@
     #d70466 100%
   );
 }
+
+@font-face { font-family: 'Cereal'; src: url('/fonts/cereal.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
+html { scroll-padding-top: 96px; }
+body { min-width: 1024px; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button:not(:disabled), [role='button'] { cursor: pointer; }
+button:active:not(:disabled) { transform: scale(.97); }
+.header-inner { position: relative; padding: 0 clamp(48px, 4.6vw, 88px); }
+.header-search { position: absolute; left: 50%; transform: translateX(-50%); z-index: 45; }
+.listing-columns { padding-top: 16px; }
+.booking-column > div { height: 100%; }
+.photo-mosaic { width: 100%; aspect-ratio: 1236 / 546; }
+.photo-mosaic-grid { height: 100%; grid-template-columns: 2.06fr 1fr 1fr; }
+.tour-header { height: 88px; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; flex-shrink: 0; }
+.tour-header h2 { position: absolute; left: 50%; transform: translateX(-50%); font-size: 18px; font-weight: 500; }
+.tour-content { width: min(1078px, calc(100vw - 160px)); margin: 0 auto; padding-top: 14px; padding-bottom: 72px; }
+.tour-categories { display: grid; grid-template-columns: repeat(8, minmax(0,1fr)); gap: 14px; }
+.tour-category { display: block; width: 100%; text-align: left; border-radius: 9px; }
+/* Frame clips the zoom to the rounded corners; image scales on the sitewide curve. */
+.tour-category-frame { display: block; overflow: hidden; border-radius: 9px; }
+.tour-category img { display: block; width: 100%; aspect-ratio: 123/116; object-fit: cover; transition: filter .2s, transform .35s var(--ease-airbnb); }
+/* Hover: slight dim plus zoom, clipped by the frame. */
+.tour-category:hover img, .tour-category:focus-visible img { filter: brightness(.9); transform: scale(1.06); }
+.tour-category-label { margin-top: 9px; display: block; color: #717171; line-height: 21px; font-size: 16px; }
+.tour-sections { margin-top: 64px; display: flex; flex-direction: column; gap: 22px; }
+.tour-room { display: grid; grid-template-columns: 1fr 506px; gap: 48px; scroll-margin-top: 30px; }
+.tour-room-label { align-self: start; position: sticky; top: 30px; }
+.tour-room h3 { font-size: 36px; line-height: 44px; font-weight: 600; letter-spacing: -1.1px; }
+.tour-room-label p { color: #717171; font-size: 18px; margin-top: 5px; line-height: 26px; }
+.tour-room-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.tour-photo { border-radius: 9px; overflow: hidden; width: 100%; aspect-ratio: 3/2; }
+.tour-photo:nth-child(3n+1) { grid-column: span 2; }
+.tour-photo img { display: block; width: 100%; height: 100%; object-fit: cover; transition: filter .2s, transform .35s var(--ease-airbnb); }
+/* Hover: slight dim plus zoom, clipped by the frame above. */
+.tour-photo:hover img, .tour-photo:focus-visible img { filter: brightness(.92); transform: scale(1.05); }
+.icon-circle { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; transition: background .2s, transform .2s; }
+.icon-circle:hover { background: #f2f2f2; }
+.description-preview { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; mask-image: linear-gradient(#000 70%,transparent); }
+.review-cards { display: grid; grid-template-columns: 1fr 1fr; column-gap: 92px; row-gap: 54px; margin-top: 32px; }
+.review-card { min-height: 208px; }
+.review-card .review-body { font-size: 18px; line-height: 24px; margin-top: 8px; }
+.review-topics { scrollbar-width: none; }
+.review-topics::-webkit-scrollbar { display:none; }
+.calendar-days { display:grid; grid-template-columns: repeat(7, 1fr); row-gap: 0; }
+.calendar-cell { position:relative; height:47px; display:flex; align-items:center; justify-content:center; }
+.calendar-cell.in-range { background: #f2f2f2; }
+.calendar-cell.range-start { background: linear-gradient(90deg, transparent 50%, #f2f2f2 50%); }
+.calendar-cell.range-end { background: linear-gradient(90deg, #f2f2f2 50%, transparent 50%); }
+.calendar-day { width:46px; height:46px; border-radius:50%; font-size:14px; }
+.calendar-day:hover:not(:disabled) { box-shadow: inset 0 0 0 1px #222; }
+.calendar-day.selected { background:#222; color:white; }
+.calendar-day:disabled { color:#d4d4d4; text-decoration:line-through; }
+.inline-calendar { display:flex; justify-content:space-between; gap:40px; }
+.inline-calendar > div { flex:1; min-width:0; }
+/* Reserve — shared by the booking card CTA and the sticky nav. Hover darkens
+   the gradient slightly; pressing gives the same 0.96 squash the reference's
+   primary buttons use, on the sitewide curve. */
+.reserve-button { background: linear-gradient(100deg,#ed1b50,#df0065); transition: filter .2s var(--ease-airbnb), transform .2s var(--ease-airbnb); }
+.reserve-button:hover { filter:brightness(.94); }
+.reserve-button:active { transform: scale(.96); filter: brightness(.9); }
+
+@keyframes overlay-enter { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+.overlay-enter { animation: overlay-enter .24s cubic-bezier(.2,0,0,1); }
+@media (max-width:1250px) { .tour-room { grid-template-columns: 1fr 48%; gap:30px; } .tour-room h3 { font-size:30px; } }
 
 @layer base {
   body {
@@ -117,5 +181,84 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Modal entry. The reference's enter/exit animation was never captured [N];
+   IMPLEMENTATION_PLAN M18 specifies a <=200ms fade as the documented default.
+   `motion-safe:` means prefers-reduced-motion skips it entirely. */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Bottom toast entry: a short rise + fade on the sitewide curve. Guarded by
+   `motion-safe:` at the call site, so reduced-motion users see it appear
+   in place. */
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Save heart: a quick overshoot when it toggles. Replayed by re-keying the
+   icon wrapper, so both save and unsave animate. */
+@keyframes heart-pop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+/* Claimed: a small settle after the label flips. */
+@keyframes pop {
+  0%   { transform: scale(0.94); }
+  60%  { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+
+/* Visible focus for every interactive element.
+   Several links and icon buttons carried no focus style at all (audit Phase 12).
+   `:where()` contributes zero specificity, so component-level overrides — the
+   Lightbox's white outline on black, for instance — still take precedence. */
+@layer base {
+  :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Motion bundles — transcribed from the reference's own computed styles
+   (REFERENCE_ANALYSIS.md §16). The reference uses ONE curve sitewide and
+   exactly four transition bundles; naming them here keeps every control
+   provably on-spec instead of hand-assembling durations per component.
+
+   Nothing exceeds 300ms, which is the reference's own ceiling.
+--------------------------------------------------------------------------- */
+@layer components {
+  /* Secondary + primary buttons */
+  .motion-control {
+    transition:
+      box-shadow 0.2s var(--ease-airbnb),
+      transform 0.25s var(--ease-airbnb),
+      background-color 0.3s var(--ease-airbnb),
+      border-color 0.3s var(--ease-airbnb),
+      color 0.3s var(--ease-airbnb);
+  }
+
+  /* Header search pill */
+  .motion-pill {
+    transition: box-shadow 0.175s var(--ease-airbnb);
+  }
+
+  /* Close / prev / next icon controls */
+  .motion-icon {
+    transition: transform 0.25s var(--ease-airbnb);
+  }
+
+  /* Small share / save icon buttons inside overlays */
+  .motion-icon-sm {
+    transition:
+      box-shadow 0.2s var(--ease-airbnb),
+      transform 0.1s var(--ease-airbnb);
   }
 }

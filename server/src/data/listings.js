@@ -13,6 +13,7 @@
  * master is 3:2 (1440x960), matching the measured reference.
  */
 
+import { createMirashyaListing } from './mirashya.js';
 const PHOTO_BASE = '/images/listings';
 
 /**
@@ -46,25 +47,29 @@ const slugify = (value) =>
  * duplicating assets (ASSET_INVENTORY.md §2.3).
  */
 function buildPhotos(listingSlug, plan) {
-  const photos = [];
-  let index = 0;
+  const make = (room, n) => ({
+    url: `${PHOTO_BASE}/${listingSlug}/${slugify(room)}-${String(n).padStart(2, '0')}.webp`,
+    alt: `${room} — view ${n}`,
+    room,
+    width: 1440,
+    height: 960,
+  });
 
+  // The lead photo of each room comes first, so the 5-tile mosaic shows five
+  // different spaces — the reference's gallery is varied, not five views of
+  // one room (REFERENCE_ANALYSIS.md §4). The Photo Tour regroups by `room`,
+  // so this ordering costs the tour nothing.
+  const leads = plan.map(({ room }) => make(room, 1));
+
+  const remainder = [];
   for (const { room, count } of plan) {
-    for (let n = 1; n <= count; n += 1) {
-      index += 1;
-      const roomSlug = slugify(room);
-      photos.push({
-        id: `p${String(index).padStart(2, '0')}`,
-        url: `${PHOTO_BASE}/${listingSlug}/${roomSlug}-${String(n).padStart(2, '0')}.jpg`,
-        alt: `${room} — view ${n}`,
-        room,
-        width: 1440,
-        height: 960,
-      });
-    }
+    for (let n = 2; n <= count; n += 1) remainder.push(make(room, n));
   }
 
-  return photos;
+  return [...leads, ...remainder].map((photo, i) => ({
+    id: `p${String(i + 1).padStart(2, '0')}`,
+    ...photo,
+  }));
 }
 
 const buildRoomGroups = (plan) =>
@@ -101,36 +106,74 @@ const ratedListing = {
 
   rating: { value: 4.84, count: 76, isNew: false },
 
+  // Rendered as the bordered 'Guest favourite' card under the overview and the
+  // laurel-wreathed summary at the top of Reviews.
+  guestFavourite: true,
+  ratingBreakdown: {
+    distribution: { 5: 68, 4: 6, 3: 1, 2: 1, 1: 0 },
+    categories: [
+      { key: 'cleanliness', label: 'Cleanliness', value: 5.0, icon: 'spray' },
+      { key: 'accuracy', label: 'Accuracy', value: 5.0, icon: 'check-circle' },
+      { key: 'checkin', label: 'Check-in', value: 5.0, icon: 'key' },
+      { key: 'communication', label: 'Communication', value: 5.0, icon: 'message' },
+      { key: 'location', label: 'Location', value: 4.8, icon: 'map' },
+      { key: 'value', label: 'Value', value: 4.8, icon: 'tag' },
+    ],
+  },
+  reviewTags: [
+    { label: 'Comfort', count: 6 }, { label: 'Accuracy', count: 5 }, { label: 'Pool', count: 5 },
+    { label: 'Condition', count: 4 }, { label: 'Hospitality', count: 8 }, { label: 'Cleanliness', count: 4 },
+    { label: 'Amenities', count: 2 }, { label: 'Location', count: 7 },
+  ],
+
+  promo: { text: 'Get 10% off your next stay.', linkLabel: 'Terms apply', cta: 'Claim' },
+  translated: true,
+
   photos: buildPhotos('listing-001', PHOTO_PLAN),
   roomGroups: buildRoomGroups(PHOTO_PLAN),
 
   host: {
     id: 'host-001',
     name: 'Sangita',
-    avatarUrl: '/images/hosts/host-001.jpg',
+    avatarUrl: '/images/hosts/host-001.webp',
     monthsHosting: 7,
     reviewCount: 69,
     rating: 4.67,
     bio: 'We host homes designed for comfort and calm. Hosting is more than providing a stay — it is about making you feel welcome and genuinely at home.',
     responseRate: 100,
     responseTime: 'within an hour',
+    verified: true,
+    facts: [
+      { icon: 'cake', text: 'Born in the 80s' },
+      { icon: 'school', text: 'Where I went to school: NICMAR Goa' },
+    ],
+    coHosts: [
+      { name: 'Sharath', avatarUrl: '/images/guests/guest-001.webp' },
+      { name: 'Aman Dev Pahwa', avatarUrl: '/images/guests/guest-002.webp' },
+      { name: 'Maria Karen Priyanka', avatarUrl: '/images/guests/guest-003.webp' },
+      { name: 'Simran', avatarUrl: '/images/guests/guest-004.webp' },
+      { name: 'Pallavi', avatarUrl: '/images/guests/guest-005.webp' },
+      { name: 'Sanyukta', avatarUrl: null },
+      { name: 'Shruti', avatarUrl: null },
+      { name: 'Amisha', avatarUrl: null },
+    ],
   },
 
   highlights: [
     {
-      icon: 'key',
+      icon: 'door',
       title: 'Self check-in',
       subtitle: 'You can check in with the building staff.',
     },
     {
-      icon: 'pool',
-      title: 'Dive right in',
-      subtitle: 'This is one of the few places in the area with a pool.',
+      icon: 'outdoor',
+      title: 'Outdoor entertainment',
+      subtitle: 'The pool and alfresco dining are great for summer trips.',
     },
     {
-      icon: 'sparkle',
-      title: 'Great for families',
-      subtitle: 'Relax with the whole family at this peaceful place to stay.',
+      icon: 'fan',
+      title: 'Designed for staying cool',
+      subtitle: 'Beat the heat with the A/C and ceiling fan.',
     },
   ],
 
@@ -167,6 +210,8 @@ const ratedListing = {
     { id: 'tv', label: 'TV', icon: 'tv', category: 'Entertainment', available: true },
     { id: 'washer', label: 'Washing machine', icon: 'washer', category: 'Bedroom and laundry', available: true },
     { id: 'aircon', label: 'Air conditioning', icon: 'snowflake', category: 'Heating and cooling', available: true },
+    { id: 'co-alarm', label: 'Carbon monoxide alarm', icon: 'alarm', category: 'Home safety', available: false },
+    { id: 'smoke-alarm', label: 'Smoke alarm', icon: 'alarm', category: 'Home safety', available: false },
     { id: 'hot-water', label: 'Hot water', icon: 'droplet', category: 'Bathroom', available: true },
     { id: 'hairdryer', label: 'Hairdryer', icon: 'hairdryer', category: 'Bathroom', available: true },
     { id: 'shampoo', label: 'Shampoo', icon: 'bottle', category: 'Bathroom', available: true },
@@ -175,8 +220,6 @@ const ratedListing = {
     { id: 'iron', label: 'Iron', icon: 'iron', category: 'Bedroom and laundry', available: true },
     { id: 'workspace', label: 'Dedicated workspace', icon: 'desk', category: 'Internet and office', available: true },
     { id: 'balcony', label: 'Balcony', icon: 'balcony', category: 'Property features', available: true },
-    { id: 'co-alarm', label: 'Carbon monoxide alarm', icon: 'alarm', category: 'Home safety', available: false },
-    { id: 'smoke-alarm', label: 'Smoke alarm', icon: 'alarm', category: 'Home safety', available: false },
     { id: 'heating', label: 'Heating', icon: 'heat', category: 'Heating and cooling', available: false },
   ],
 
@@ -184,12 +227,12 @@ const ratedListing = {
     {
       name: 'Bedroom 1',
       beds: ['1 king bed'],
-      imageUrl: `${PHOTO_BASE}/listing-001/bedroom-1-01.jpg`,
+      imageUrl: `${PHOTO_BASE}/listing-001/bedroom-1-01.webp`,
     },
     {
       name: 'Bedroom 2',
       beds: ['1 king bed'],
-      imageUrl: `${PHOTO_BASE}/listing-001/bedroom-2-01.jpg`,
+      imageUrl: `${PHOTO_BASE}/listing-001/bedroom-2-01.webp`,
     },
   ],
 
@@ -205,7 +248,8 @@ const ratedListing = {
     {
       id: 'r1',
       author: 'Yogesh',
-      avatarUrl: '/images/guests/guest-001.jpg',
+      tenure: '2 months on the platform',
+      avatarUrl: '/images/guests/guest-001.webp',
       rating: 5,
       date: '2026-09-07',
       body: 'Best stay in Candolim. The apartment was spotless, the pool was quiet, and the beach really is a short walk. Sangita replied within minutes every time.',
@@ -213,7 +257,8 @@ const ratedListing = {
     {
       id: 'r2',
       author: 'Meera',
-      avatarUrl: '/images/guests/guest-002.jpg',
+      tenure: '3 years on the platform',
+      avatarUrl: '/images/guests/guest-002.webp',
       rating: 5,
       date: '2026-08-21',
       body: 'Spacious and very well kept. The kitchen had everything we needed and the balcony was the best part of the trip. Would book again without hesitating.',
@@ -221,7 +266,8 @@ const ratedListing = {
     {
       id: 'r3',
       author: 'Daniel',
-      avatarUrl: '/images/guests/guest-003.jpg',
+      tenure: '1 year on the platform',
+      avatarUrl: '/images/guests/guest-003.webp',
       rating: 4,
       date: '2026-08-02',
       body: 'Great location and comfortable beds. The building can be a little noisy in the morning, but the apartment itself was exactly as described.',
@@ -229,7 +275,8 @@ const ratedListing = {
     {
       id: 'r4',
       author: 'Priya',
-      avatarUrl: '/images/guests/guest-004.jpg',
+      tenure: '5 years on the platform',
+      avatarUrl: '/images/guests/guest-004.webp',
       rating: 5,
       date: '2026-07-15',
       body: 'Check-in was effortless even though we arrived late. Wifi was strong enough for a full day of calls. Highly recommended for a longer stay.',
@@ -241,12 +288,28 @@ const ratedListing = {
     checkOut: 'before 11:00 am',
     maxGuests: 4,
     cancellation: 'Free cancellation before 1 October. Cancel before check-in for a partial refund.',
+    cancellationDeadline: '2026-10-01',
     safety: [
       'Carbon monoxide alarm not reported',
       'Smoke alarm not reported',
       'Not suitable for children and infants',
     ],
   },
+
+  neighbourhood: {
+    heading: 'Neighbourhood highlights',
+    body: 'Located in the heart of Candolim, the building offers a peaceful stay with easy access to beaches, cafés and popular attractions.',
+  },
+
+  nearbyStays: [
+    { id: 'n1', title: 'Beautiful studio with a view to die for', price: 23600, rating: 4.91, imageUrl: '/images/listings/listing-001/living-room-02.webp' },
+    { id: 'n2', title: 'NAQAB — 1BHK with private pool', price: 42218, rating: 4.95, imageUrl: '/images/listings/listing-001/living-room-03.webp' },
+    { id: 'n3', title: 'Greentique luxury flat with plunge pool, Calangute', price: 44506, rating: 4.94, imageUrl: '/images/listings/listing-001/living-room-04.webp' },
+    { id: 'n4', title: 'The Tropical Studio | 5 mins to beach', price: 22824, rating: 4.96, imageUrl: '/images/listings/listing-001/bedroom-1-02.webp' },
+    { id: 'n5', title: 'Luxury Casa Bella 1BHK with plunge pool, Calangute', price: 39942, rating: 4.95, imageUrl: '/images/listings/listing-001/living-room-05.webp' },
+    { id: 'n6', title: 'Sunset loft near Baga', price: 31200, rating: 4.89, imageUrl: '/images/listings/listing-001/bedroom-2-02.webp' },
+    { id: 'n7', title: 'Garden apartment, Sinquerim', price: 27450, rating: 4.92, imageUrl: '/images/listings/listing-001/dining-area-02.webp' },
+  ],
 };
 
 /* -------------------------------------------------------------------------
@@ -261,12 +324,14 @@ const newListing = {
   propertyType: 'Entire serviced apartment',
   capacity: { guests: 2, bedrooms: 1, beds: 1, bathrooms: 1 },
   rating: { value: null, count: 1, isNew: true },
-  photos: buildPhotos('listing-002', PHOTO_PLAN),
+  // Test-only fixture (exercises the "New listing" render path). It shares the
+  // primary listing's photo set rather than duplicating 34 files on disk.
+  photos: buildPhotos('listing-001', PHOTO_PLAN),
   host: {
     ...ratedListing.host,
     id: 'host-002',
     name: 'Arjun',
-    avatarUrl: '/images/hosts/host-002.jpg',
+    avatarUrl: '/images/hosts/host-002.webp',
     monthsHosting: 2,
     reviewCount: 1,
     rating: null,
@@ -275,7 +340,7 @@ const newListing = {
     {
       name: 'Bedroom 1',
       beds: ['1 queen bed'],
-      imageUrl: `${PHOTO_BASE}/listing-002/bedroom-1-01.jpg`,
+      imageUrl: `${PHOTO_BASE}/listing-001/bedroom-1-01.webp`,
     },
   ],
   pricing: { nightlyRate: 4200, currency: 'INR' },
@@ -284,7 +349,7 @@ const newListing = {
     {
       id: 'r1',
       author: 'Nikhil',
-      avatarUrl: '/images/guests/guest-005.jpg',
+      avatarUrl: '/images/guests/guest-005.webp',
       rating: 5,
       date: '2026-09-09',
       body: 'Lovely little studio and a very responsive host. Everything was clean and exactly as pictured.',
@@ -292,4 +357,4 @@ const newListing = {
   ],
 };
 
-export const listings = [ratedListing, newListing];
+export const listings = [createMirashyaListing(ratedListing), newListing];

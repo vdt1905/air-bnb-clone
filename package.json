@@ -21,6 +21,8 @@
     "test": "npm run test --workspaces --if-present"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.63.0",
     "concurrently": "^9.2.1"
   }
 }

@@ -9,7 +9,7 @@ export default function App() {
       <Routes>
         <Route
           path="/"
-          element={<Navigate to={`/listings/${DEFAULT_LISTING_ID}`} replace />}
+          element={<Navigate to={`/listings/${DEFAULT_LISTING_ID}?check_in=2026-10-18&check_out=2026-10-23&adults=2`} replace />}
         />
         <Route path="/listings/:id" element={<ListingPage />} />
         <Route path="*" element={<NotFound />} />

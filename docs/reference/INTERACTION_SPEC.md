@@ -90,7 +90,7 @@ One easing curve sitewide: `cubic-bezier(0.2, 0, 0, 1)`. Durations: 0.1s / 0.175
 | 5 | Share | click | **Yes** | No | **Yes** | dialog **[M]** |
 | 6 | Save | click | **Yes** (login) | No | **Yes** | dialog **[M]** |
 | 7 | Gallery tile | click | **Yes** | `?modal=PHOTO_TOUR_SCROLLABLE` | **Yes** | Close btn **[M]** |
-| 8 | Gallery tile | hover | — | — | — | **no effect [M‑neg]** |
+| 8 | Gallery tile | hover | — | — | — | **darkening scrim** — see §1.5 correction |
 | 9 | Show all photos | click | **Yes** | `?modal=PHOTO_TOUR_SCROLLABLE` | **Yes** | Close btn **[M]** |
 | 10 | Show all N amenities | click | **Yes** | No | **Yes** | dialog **[M]** |
 | 11 | Show more (description) | click | **Yes** | `?modal=DESCRIPTION` | **Yes** | dialog **[M]** |
@@ -193,7 +193,7 @@ transition: box-shadow 0.175s cubic-bezier(0.2, 0, 0, 1);
 
 ### 1.5 Gallery
 
-#### Tile hover — **no effect [M‑neg]**
+#### Tile hover — **darkening scrim** *(corrected)*
 
 Hovered tile 2 with a real mouse and re-read the image's computed style:
 
@@ -204,7 +204,19 @@ Hovered tile 2 with a real mouse and re-read the image's computed style:
 | `opacity` | `1` | `1` |
 | Overlay child background | none | none |
 
-**Do not implement a zoom, dim, or scrim on gallery tiles.** The reference has none.
+> **Correction.** The reading above was a FALSE NEGATIVE. It sampled `transform`,
+> `filter` and `opacity` on the `<img>` and the background of any child `<div>` — but the
+> reference applies the effect on a **separate overlay layer**, which none of those probes
+> reach. Reference screenshots show the tile darkening on hover. This is the same blind
+> spot already flagged for the primary CTA (§1.8).
+>
+> **Implement a subtle darkening scrim** (~10% black) over the tile on hover, at 0.3s on
+> the sitewide curve. Do NOT scale, zoom or filter the image itself — those properties
+> genuinely are unchanged.
+>
+> **Lesson for future measurement:** `getComputedStyle` on an element cannot see effects
+> applied by pseudo-elements or sibling overlay layers. A negative result there means
+> "not on this element", not "not present".
 
 #### Tile click **[M]**
 

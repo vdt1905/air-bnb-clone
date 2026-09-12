@@ -4,11 +4,15 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "sync:fallback": "node scripts/sync-fallback.mjs",
+    "predev": "node scripts/sync-fallback.mjs",
     "dev": "vite",
+    "prebuild": "node scripts/sync-fallback.mjs",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "lucide-react": "^1.45.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-router-dom": "^7.13.0",

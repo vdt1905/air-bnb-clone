@@ -42,8 +42,15 @@ cd client && npm run dev
 → http://localhost:5173
 
 `/api` is proxied to `http://localhost:5000`, so the browser sees a single origin in
-development. The client starts fine without the server — API calls simply surface the error
-state.
+development.
+
+**The client works without the server.** If the API cannot be reached — server not started,
+or the build is served as plain static files — the page renders from a bundled copy of the
+listing data at `client/src/data/listings.fallback.json`. That file is generated from the
+server's own model by `client/scripts/sync-fallback.mjs`, which runs automatically before
+`dev` and `build` (or on demand with `npm run sync:fallback --workspace client`). Do not edit
+it by hand. When the server IS running, the API is the source of truth and its errors
+(e.g. an unknown listing id) are shown as usual.
 
 ### Backend only
 
@@ -67,6 +74,34 @@ curl http://localhost:5000/api/health
 | `npm run build` | Production build of the client |
 | `npm start` | Runs the server without watch mode |
 | `npm test` | Runs workspace tests (none yet — M2 onward) |
+
+## Deploy to Vercel
+
+Both halves deploy as **one Vercel project**: the client as static files, the Express app as a
+serverless function. No environment variables are required.
+
+1. Push the repo to GitHub and import it at https://vercel.com/new.
+2. Leave the settings as detected — `vercel.json` at the root already sets:
+   - install `npm install`, build `npm run build`, output `client/dist`
+   - `api/index.js` → the Express app, with every `/api/*` request rewritten to it
+   - every other path → `index.html` (client-side routing), static files first
+3. Deploy. `https://<project>.vercel.app/listings/listing-001` serves the page and
+   `https://<project>.vercel.app/api/health` the API, same origin.
+
+How it fits together:
+
+- `api/index.js` re-exports `server/src/app.js` (which never calls `listen()`); Express still
+  sees the original `/api/...` path, so no routes change.
+- `server/src/config/env.js` detects `VERCEL=1` and derives what production otherwise demands:
+  `CLIENT_ORIGIN` from the deployment domain, `TRUST_PROXY=1` (Vercel is a real proxy, and the
+  rate limiter keys on the forwarded IP) and a placeholder `PORT`. Values set in the dashboard win.
+- The client calls `/api` relative to its own origin, so no `VITE_API_BASE_URL` is needed. If the
+  function were ever unreachable the bundled fallback data still renders the page.
+- Long-lived cache headers are set for hashed `/assets` and for `/images`, `/fonts`.
+
+Deploying the client elsewhere (Netlify, GitHub Pages…) also works: build with `npm run build`,
+serve `client/dist` with an SPA fallback, and either set `VITE_API_BASE_URL` to a hosted API or
+rely on the bundled data.
 
 ## API
 

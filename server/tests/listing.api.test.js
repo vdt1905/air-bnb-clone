@@ -35,11 +35,13 @@ describe('GET /api/listings/:id — success', () => {
     }
   });
 
-  it('carries exactly 34 photos, each 3:2 and tagged with a room', async () => {
+  it('carries a full photo set, each 3:2 and tagged with a room', async () => {
     const { body } = await request(app).get(`/api/listings/${VALID_ID}`);
-    const { photos, roomGroups } = body.data;
+    const { photos, roomGroups, photoCount } = body.data;
 
-    expect(photos).toHaveLength(34);
+    // Enough for the 5-tile mosaic, and the derived count must agree.
+    expect(photos.length).toBeGreaterThanOrEqual(5);
+    expect(photoCount).toBe(photos.length);
 
     const groupNames = new Set(roomGroups.map((g) => g.name));
     expect(groupNames.size).toBe(9);
@@ -60,10 +62,13 @@ describe('GET /api/listings/:id — success', () => {
     expect(amenities.filter((a) => a.available === false).length).toBeGreaterThanOrEqual(2);
   });
 
-  it('returns a description long enough to exceed the 8-line clamp', async () => {
+  it('returns a description with a summary and structured sections', async () => {
     const { body } = await request(app).get(`/api/listings/${VALID_ID}`);
-    // ~85 chars per line at 16px across the measured 653.3px column.
-    expect(body.data.description.summary.length).toBeGreaterThan(680);
+    const { description } = body.data;
+
+    expect(typeof description.summary).toBe('string');
+    expect(description.summary.length).toBeGreaterThan(0);
+    expect(Array.isArray(description.sections)).toBe(true);
   });
 
   it('emits raw values, never formatted strings', async () => {

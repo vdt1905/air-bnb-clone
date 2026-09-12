@@ -1,0 +1,66 @@
+{
+  "profiles": [
+    {
+      "src": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-search-bar-icons/original/4aae4ed7-5939-4e76-b100-e69440ebeae4.png?im_w=240",
+      "alt": ""
+    },
+    {
+      "src": "https://a0.muscache.com/im/pictures/user/User/original/6b72f8b5-0e66-4bf1-8ba3-ff0f87ff3687.jpeg?im_w=120",
+      "alt": ""
+    },
+    {
+      "src": "https://a0.muscache.com/im/pictures/AirbnbPlatformAssets/AirbnbPlatformAssets-Review-AI-Synthesis/original/c4b3ecf1-88ce-4157-a080-28dec69d45cd.png?im_w=120",
+      "alt": ""
+    },
+    {
+      "src": "https://a0.muscache.com/im/pictures/AirbnbPlatformAssets/AirbnbPlatformAssets-Review-AI-Synthesis/original/b0dbbf5c-02a9-4781-a3ad-cf6953beccdc.png?im_w=120",
+      "alt": ""
+    },
+    {
+      "src": "https://a0.muscache.com/im/pictures/AirbnbPlatformAssets/AirbnbPlatformAssets-Review-AI-Synthesis/original/aa73c8e3-75cd-4130-8a7f-df014c5d5e61.png?im_w=120",
+      "alt": ""
+    },
+    {
+      "src": "https://a0.muscache.com/im/pictures/AirbnbPlatformAssets/AirbnbPlatformAssets-Review-AI-Synthesis/original/b5957392-bf60-4304-8666-c030859eebf7.png?im_w=120",
+      "alt": ""
+    },
+    {
+      "src": "https://a0.muscache.com/im/pictures/AirbnbPlatformAssets/AirbnbPlatformAssets-Review-AI-Synthesis/original/e4546c79-fd9d-412c-862b-7faade48f32e.png?im_w=120",
+      "alt": ""
+    },
+    {
+      "src": "https://a0.muscache.com/im/pictures/AirbnbPlatformAssets/AirbnbPlatformAssets-Review-AI-Synthesis/original/b0d9a4f0-26d1-4d4d-a269-4884338ab168.png?im_w=120",
+      "alt": ""
+    },
+    {
+      "src": "https://a0.muscache.com/im/pictures/AirbnbPlatformAssets/AirbnbPlatformAssets-Review-AI-Synthesis/original/a8dea71f-05c2-4d73-9d0e-a3396018e53e.png?im_w=120",
+      "alt": ""
+    },
+    {
+      "src": "https://a0.muscache.com/im/pictures/AirbnbPlatformAssets/AirbnbPlatformAssets-Review-AI-Synthesis/original/1d5a4065-220e-4d80-b44f-019dd4a0ae68.png?im_w=120",
+      "alt": ""
+    },
+    {
+      "src": "https://a0.muscache.com/im/pictures/AirbnbPlatformAssets/AirbnbPlatformAssets-Review-AI-Synthesis/original/c1ebe817-e327-4dd9-b172-d88ebaf38d11.png?im_w=120",
+      "alt": ""
+    },
+    {
+      "src": "https://a0.muscache.com/im/pictures/AirbnbPlatformAssets/AirbnbPlatformAssets-Review-AI-Synthesis/original/481a6680-46b2-4c94-91e9-d7917d97b660.png?im_w=120",
+      "alt": ""
+    },
+    {
+      "src": "https://a0.muscache.com/im/pictures/user/User/original/6b72f8b5-0e66-4bf1-8ba3-ff0f87ff3687.jpeg?im_w=240",
+      "alt": ""
+    }
+  ],
+  "fonts": [
+    "https://a0.muscache.com/airbnb/static/airbnb-dls-web/build/fonts/cereal-variable/AirbnbCerealVF_W_Wght.8816d9e5c3b6a860636193e36b6ac4e4.woff2"
+  ],
+  "hero": [
+    "https://a0.muscache.com/im/pictures/hosting/Hosting-1599895892448055764/original/090d8b0b-b539-42c0-84f8-e1fb0cdf9a93.jpeg?im_w=1200",
+    "https://a0.muscache.com/im/pictures/hosting/Hosting-1599895892448055764/original/9be71047-fc52-438a-9270-75cb470f6752.jpeg?im_w=720",
+    "https://a0.muscache.com/im/pictures/hosting/Hosting-1599895892448055764/original/67c61c6f-6260-4809-9510-0360e58a345d.jpeg?im_w=720",
+    "https://a0.muscache.com/im/pictures/hosting/Hosting-1599895892448055764/original/c904e1ab-a39d-4ef0-bdea-8c0bd16b9e3d.jpeg?im_w=720",
+    "https://a0.muscache.com/im/pictures/hosting/Hosting-1599895892448055764/original/f6de1663-4e9c-4414-b63b-29a154a92ee1.jpeg?im_w=720"
+  ]
+}

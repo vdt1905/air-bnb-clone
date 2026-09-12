@@ -1,356 +1,748 @@
-# Asset Inventory — Airbnb Listing Page
+# Asset Inventory
+
+Everything needed to reproduce the listing page visually, without reading the
+reference application's source.
 
 Companion to [REFERENCE_ANALYSIS.md](./REFERENCE_ANALYSIS.md) (what it looks like) and
-[INTERACTION_SPEC.md](./INTERACTION_SPEC.md) (what it does). This document lists **what must
-be produced or sourced** to reproduce the visual result.
+[INTERACTION_SPEC.md](./INTERACTION_SPEC.md) (what it does).
 
-## Method
+---
 
-Assets were enumerated from a real Chrome session by recording every `image`, `font`,
-`stylesheet` and `media` network response, then reading each `<img>` and `<svg>` from the
-DOM: `naturalWidth/Height`, rendered box, `object-fit`, `object-position`, `border-radius`,
-`loading`, and the CDN's width parameter.
+## 0. How this was produced, and one caveat
+
+Assets were enumerated from a real Chrome session: every `image`, `font`, `stylesheet`
+and `media` response was recorded, then each `<img>` and `<svg>` was read from the DOM —
+`naturalWidth/Height`, rendered box, `object-fit`, `object-position`, `border-radius`,
+`loading`, and the CDN width parameter.
+
+> **Caveat on the reference URL.** `airbnb-clone-umber-two.vercel.app` sits behind
+> Vercel's bot checkpoint. It answers a first request from a fresh browser profile and
+> then blocks every subsequent navigation (`"This page could not be verified"`), so it
+> could not be measured. **The numbers below were measured from the original
+> airbnb.com listing page**, which that clone reproduces. Every figure is a real
+> measurement; none is an estimate. Where something was never observed it is marked
+> **[N]** rather than guessed.
+
+**No source code was read or reproduced.** Asset URLs are cited as evidence of
+structure and sizing only — the images themselves belong to Airbnb and must be replaced
+(see §10 class D).
 
 | Item | Value |
 |---|---|
 | Viewport | 1440 × 900, DPR 1 |
-| Listing | `1759355047605224205` — 34 photos |
 | Network totals | **74 image**, **3 font**, 3 stylesheet, 6 media responses |
-| Date | 2026-09-11 |
-
-> **Reference note.** Phase 3 names the Vercel clone; that deployment is bot-blocked
-> (HTTP 429), so — as with Phases 1–2 — the **original Airbnb site** was analysed. No
-> application source code was read or reproduced. Asset *URLs* below are evidence of
-> structure and sizing; the images themselves are Airbnb's and must be replaced with your
-> own photography.
-
-### Legend
-
-- **[M]** Measured from the DOM / network.
-- **[V]** Read from a screenshot.
-- **[N]** Not observed.
+| Photos per listing | **34** |
 
 ---
 
-## 1. The short version
+## 1. Every visible asset
 
-| Category | Count | Verdict |
-|---|---|---|
-| Property photographs | **34** per listing | **Must be sourced** — real image files |
-| Host avatar | 1 | **Must be sourced** |
-| Search-pill illustration | 1 PNG | Sourced, or replaceable with an icon |
-| Logo | 1 inline SVG path | **Recreate** — must be your own mark |
-| UI icons | **59 inline SVGs** | **Replace with an icon library** |
-| Map | Google Maps canvas + SVG marker data-URIs | Library or static image |
-| Fonts | **1 variable woff2** (+ Roboto via Maps) | Substitute a free variable font |
-| Decorative backgrounds | **0 raster** — 2 CSS gradients | **Pure CSS** |
+| ID | Asset | Location | Purpose | Required? | Type | Class |
+|---|---|---|---|---|---|---|
+| A01 | Hero property image | Gallery, large left tile | Primary image, LCP element | Yes | Photo | **D** |
+| A02–A05 | Gallery images 2–5 | Gallery, right 2×2 grid | Mosaic | Yes | Photo | **D** |
+| A06–A34 | Gallery images 6–34 | Photo Tour + Lightbox only | Full photo set | Yes | Photo | **D** |
+| A35 | Host avatar | Host strip (40px), Meet-your-host (88px) | Host identity | Yes | Photo | **D** |
+| A36 | Avatar fallback | Any host/guest without a photo | Placeholder | Yes | Generated | **C** |
+| A37–A41 | Reviewer avatars ×5 | Reviews section | Reviewer identity | Optional | Photo | **D** |
+| A42 | Logo / wordmark | Header, 102 × 32 | Branding | Yes | SVG | **C** (original) |
+| A43 | UI icon set (~25 unique) | Throughout | Interface affordances | Yes | SVG | **C** |
+| A44 | Map visual | Location section, 1120 × 480 | Neighbourhood context | Yes | Image or map lib | **C** |
+| A45 | Map marker | On the map | Location pin | Yes | Inline SVG | **C** |
+| A46 | Search-pill illustration | Header search bar, 48 × 48 | Decoration | Optional | PNG | **C** |
+| A47 | Brand gradient (CTA) | Reserve button | Brand accent | Yes | CSS gradient | **C** |
+| A48 | Search-submit gradient | Header search button | Brand accent | Yes | CSS gradient | **C** |
+| A49 | Map pointer/tail | Map callout | Decoration | Optional | CSS gradient | **C** |
+| A50 | Variable UI font | Whole page | Typography | Yes | woff2 | **D** |
+| A51 | Favicon | Browser tab | Branding | Yes | SVG | **C** |
+| A52 | Sleeping-arrangement images ×2 | "Where you'll sleep" | Room previews | Yes | Photo (reused) | **D** |
 
-**The headline:** apart from photography, the avatar, and one small PNG, this page uses
-**no image files at all**. Every icon, the logo, both gradients and every divider are vector
-or CSS. An implementation needs ~35 photographs and essentially nothing else.
+**The headline:** apart from photography, one avatar and one optional 48 × 48 PNG, this
+page uses **no image files at all**. Every icon, the logo, both gradients, every divider
+and the map marker are vector or CSS. The reference declares exactly **two** CSS
+`background-image` values on the entire page — both gradients.
 
 ---
 
-## 2. Property / gallery photography
+## 2. Gallery asset inventory
 
-All property images come from `a0.muscache.com` (Airbnb's image CDN).
-
-### 2.1 Source characteristics **[M]**
+### 2.1 Properties shared by all 34 photos
 
 | Property | Value |
 |---|---|
-| Path shape | `/im/pictures/airflow/Hosting-<listingId>/original/<uuid>.jpg` and `/im/pictures/hosting/Hosting-<listingId>/original/<uuid>.jpeg` |
-| Master aspect ratio | **3 : 2** — every variant measured is 3:2 (`1440×960`, `1200×800`, `720×480`, `480×320`) |
-| Width ladder (`?im_w=`) | **120, 240, 480, 720, 1200, 1440** |
-| Delivered formats | **AVIF** and **WebP** via content negotiation on `.jpg` URLs (also PNG / GIF for platform assets) |
-| Average payload | ≈ **13.6 KB** per image |
-| `srcset` | **Not used** for gallery images (`srcsetN: 0`) — the CDN's `im_w` parameter does the work instead |
-| Total per listing | **34** photographs |
+| Master aspect ratio | **3 : 2** — confirmed across `1440×960`, `1200×800`, `720×480`, `480×320` |
+| Delivered formats | **AVIF** and **WebP** via content negotiation on `.jpg` URLs |
+| Width ladder | **120 / 240 / 480 / 720 / 1200 / 1440** (CDN `?im_w=` parameter) |
+| `srcset` | **Not used** — the width parameter does the work |
+| Average payload | ≈ **13.6 KB** per delivered image |
+| `object-position` | **`50% 50%` on every slot** — no art direction anywhere |
+| Reused? | **Yes — every photo is reused across surfaces.** One list, three presentations |
+| Local copy needed? | **Yes, all 34** |
 
-The single most reusable finding: **author every property photo at 3:2 and generate a
-120/240/480/720/1200/1440 width ladder.** Every slot on the page is fed from that one ladder.
+### 2.2 Per-image inventory
 
-### 2.2 Per-slot inventory **[M]**
+`L` = appears on the Listing page · `T` = Photo Tour · `X` = Lightbox
 
-| # | Slot | Location | Variant | Natural | Rendered | Aspect | Fit | `object-position` | Radius | Repeats | In Tour | In Lightbox |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | Gallery hero | Listing, `x=152.3 y=174` | `im_w=1200` | 1200×800 | **560 × 476** | 3:2 → **~1.18:1** | `cover` | `50% 50%` | 0 (see note) | Yes | Yes | Yes |
-| 2 | Gallery top-middle | `x=720.3 y=174` | `im_w=720` | 720×480 | **272 × 238** | 3:2 → ~1.14:1 | `cover` | `50% 50%` | 0 | Yes | Yes | Yes |
-| 3 | Gallery bottom-middle | `x=720.3 y=420.1` | `im_w=720` | 720×480 | **272 × 230** | 3:2 → ~1.18:1 | `cover` | `50% 50%` | 0 | Yes | Yes | Yes |
-| 4 | Gallery top-right | `x=1000.3 y=174` | `im_w=720` | 720×480 | **272 × 238** | 3:2 | `cover` | `50% 50%` | 0 | Yes | Yes | Yes |
-| 5 | Gallery bottom-right | `x=1000.3 y=420.1` | `im_w=720` | 720×480 | **272 × 230** | 3:2 | `cover` | `50% 50%` | 0 | Yes | Yes | Yes |
-| 6 | Sleeping arrangement | Left column | `im_w=480` | 480×320 | **319 × 212** | 3:2 → **3:2 preserved** | `cover` | `50% 50%` | **8px** | Yes | Yes | Yes |
-| 7 | Photo Tour — category thumb | Tour top strip | `im_w=480`* | — | **146 × 96** | ~1.52:1 | `cover` | `50% 50%` | 0 | Yes | — | — |
-| 8 | Photo Tour — large | Tour body | `im_w=1200` | 1200×800 | **741 × 497** | 3:2 preserved | `cover` | `50% 50%` | 0 | Yes | — | Yes |
-| 9 | Photo Tour — secondary | Tour body | `im_w=720` | 720×480 | **367 × 246** | 3:2 preserved | `cover` | `50% 50%` | 0 | Yes | — | Yes |
-| 10 | **Lightbox** | Full screen | **`im_w=1440`** | **1440×960** | **1233 × 676** | 3:2 preserved | **`contain`** | `50% 50%` | 0 | Yes | — | — |
-
-\* thumbnail variant inferred from the ladder; the exact `im_w` for the category strip was
-not isolated **[N]**.
-
-**Cropping notes:**
-
-- Every slot uses **`object-fit: cover` except the lightbox**, which uses **`contain`** so
-  the full frame is visible against black. This is the only fit change on the page. **[M]**
-- `object-position` is **`50% 50%` everywhere** — no art-direction, no focal points. **[M]**
-- Gallery tiles crop a 3:2 master to ~1.14–1.18:1, so **roughly 20–25% of image height is
-  cropped away** in the mosaic. Compose photos with headroom. **[M]**
-- The sleeping, tour and lightbox slots all preserve 3:2 — **no crop**. **[M]**
-
-**Radius note [M]:** every gallery `<img>` computes `border-radius: 0`. The mosaic's rounded
-corners come from a **12px-radius wrapper with `overflow: hidden`** one level up. Only the
-sleeping-arrangement images carry radius (8px) on the image itself.
-
-### 2.3 Reuse across surfaces **[M]**
-
-The same file is reused at different variants rather than re-cropped. Traced
-`7e3895ba-feba-4388-8cc4-53b0630527e4.jpg`:
-
-| Surface | Variant | Rendered |
-|---|---|---|
-| Gallery hero | `im_w=1200` | 560 × 476 (`cover`) |
-| Photo Tour large | `im_w=1200` | 741 × 497 (`cover`) |
-| Lightbox | `im_w=1440` | 1233 × 676 (`contain`) |
-
-**Implication:** the data model needs **one photo list**; gallery, tour and lightbox are
-three presentations of it, not three asset sets. Gallery shows **5 of 34**; the tour shows
-all 34 grouped by room; the lightbox shows all 34 one at a time.
-
-### 2.4 Loading **[M]**
-
-| Slot | `loading` |
-|---|---|
-| Gallery (all 5) | `auto` — eager, above the fold |
-| Host overview avatar | `lazy` |
-| Sleeping images | `auto` |
-| Photo Tour body | Lazy — 21 of 34 `<img>` present after initial scroll |
-
-The hero image carries `elementtiming="LCP-target"`, confirming it is treated as the LCP
-element. **[M]**
-
----
-
-## 3. Host / avatar images
-
-| # | Asset | Location | Variant | Natural | Rendered | Fit | Radius | Repeats |
+| # | Room | Listing slot | L | T | X | Displayed (listing) | Crop | Object-position |
 |---|---|---|---|---|---|---|---|---|
-| 11 | Host avatar — small | `HOST_OVERVIEW_DEFAULT` | `im_w=120` | 40×40 | **40 × 40** | `cover` | **`0px` on the `<img>`** | Same file as #12 |
-| 12 | Host avatar — large | `MEET_YOUR_HOST` | `im_w=240` | 240×240 | **88 × 88** | `cover` | **`50%`** | Same file as #11 |
+| 01 | Living room | **Hero** | ✔ | ✔ | ✔ | 560 × 476 | cover | 50% 50% |
+| 02 | Full kitchen | Tile 2 (top-mid) | ✔ | ✔ | ✔ | 272 × 238 | cover | 50% 50% |
+| 03 | Dining area | Tile 3 (top-right) | ✔ | ✔ | ✔ | 272 × 238 | cover | 50% 50% |
+| 04 | Bedroom 1 | Tile 4 (bot-mid) | ✔ | ✔ | ✔ | 272 × 230 | cover | 50% 50% |
+| 05 | Bedroom 2 | Tile 5 (bot-right) | ✔ | ✔ | ✔ | 272 × 230 | cover | 50% 50% |
+| 06 | Full bathroom 1 | — | ✘ | ✔ | ✔ | — | cover | 50% 50% |
+| 07 | Full bathroom 2 | — | ✘ | ✔ | ✔ | — | cover | 50% 50% |
+| 08 | Exterior | — | ✘ | ✔ | ✔ | — | cover | 50% 50% |
+| 09 | Pool | — | ✘ | ✔ | ✔ | — | cover | 50% 50% |
+| 10–13 | Living room 2–5 | — | ✘ | ✔ | ✔ | — | cover | 50% 50% |
+| 14–16 | Full kitchen 2–4 | — | ✘ | ✔ | ✔ | — | cover | 50% 50% |
+| 17–18 | Dining area 2–3 | — | ✘ | ✔ | ✔ | — | cover | 50% 50% |
+| 19–22 | Bedroom 1 2–5 | — | ✘ | ✔ | ✔ | — | cover | 50% 50% |
+| 23–25 | Bedroom 2 2–4 | — | ✘ | ✔ | ✔ | — | cover | 50% 50% |
+| 26–27 | Full bathroom 1 2–3 | — | ✘ | ✔ | ✔ | — | cover | 50% 50% |
+| 28–29 | Full bathroom 2 2–3 | — | ✘ | ✔ | ✔ | — | cover | 50% 50% |
+| 30–32 | Exterior 2–4 | — | ✘ | ✔ | ✔ | — | cover | 50% 50% |
+| 33–34 | Pool 2–3 | — | ✘ | ✔ | ✔ | — | cover | 50% 50% |
 
-**Notes [M]:**
+**Every one of the 34 appears in both the Photo Tour and the Lightbox.** Only the first
+five appear on the listing page.
 
-- Path: `/im/pictures/user/User/original/<uuid>.jpeg` — **1:1 square master**.
-- One file serves both slots at two variants (120 and 240).
-- The small avatar's `<img>` computes `border-radius: 0`, yet renders circular **[V]** — the
-  circle is clipped by an ancestor. The large avatar carries `border-radius: 50%` directly.
-  Implement the circle on a wrapper to match both.
-- A **generated fallback** exists at `/im/Portrait/Avatars/v2/green` for hosts without a
-  photo — i.e. a coloured placeholder, trivially reproducible in CSS. **[M]**
+### 2.3 The same photo at different sizes
+
+Each photo is rendered at up to five different sizes. Traced for photo 01:
+
+| Surface | Variant requested | Rendered | Fit |
+|---|---|---|---|
+| Gallery hero | `im_w=1200` | 560 × 476 | cover |
+| Gallery secondary | `im_w=720` | 272 × 238 | cover |
+| Tour category thumbnail | `im_w=480` | 146.3 × 96.2 | cover |
+| Tour lead photo | `im_w=1200` | 741.3 × 494 | cover |
+| Tour paired photo | `im_w=720` | 366.65 × 244 | cover |
+| **Lightbox** | **`im_w=1440`** | box 1248 × 676 | **contain** |
+
+**Implication for the data model:** ship **one photo array**. Gallery, Tour and Lightbox
+are three presentations of it, not three asset sets. Duplicating per-surface assets is
+the mistake to avoid.
 
 ---
 
-## 4. Logo
+## 3. Image ordering
 
-| Property | Value |
-|---|---|
-| Type | **Inline `<svg>`** — not an image file **[M]** |
-| `viewBox` | `0 0 3490 1080` **[M]** |
-| Rendered | **102 × 32** at `x = 48, y = 32` **[M]** |
-| Geometry | **A single `<path>`** — wordmark and glyph in one path **[M]** |
-| Markup size | ≈ 4.0 KB **[M]** |
-| Colour | Brand Rausch pink **[V]** (the `<svg>` element itself computes `fill: rgb(0,0,0)`; colour is applied on the path) |
+Order is identical on all three surfaces — the array index *is* the canonical order.
 
-**Action:** this must be **your own original mark** — do not reproduce Airbnb's path data.
-Match only the *slot*: a single-path SVG, ~3.27:1 aspect, rendered 102 × 32, left-aligned at
-a 48px gutter, vertically centered in the 96px header.
+```text
+01 → Living room       (gallery hero)
+02 → Full kitchen      (gallery tile 2)
+03 → Dining area       (gallery tile 3)
+04 → Bedroom 1         (gallery tile 4)
+05 → Bedroom 2         (gallery tile 5)
+06 → Full bathroom 1
+07 → Full bathroom 2
+08 → Exterior
+09 → Pool
+10 → Living room 2      ┐
+11 → Living room 3      │
+12 → Living room 4      │
+13 → Living room 5      │
+14 → Full kitchen 2     │
+15 → Full kitchen 3     │
+16 → Full kitchen 4     │
+17 → Dining area 2      │
+18 → Dining area 3      │
+19 → Bedroom 1 (2)      │ remaining photos,
+20 → Bedroom 1 (3)      │ grouped by room
+21 → Bedroom 1 (4)      │
+22 → Bedroom 1 (5)      │
+23 → Bedroom 2 (2)      │
+24 → Bedroom 2 (3)      │
+25 → Bedroom 2 (4)      │
+26 → Full bathroom 1 (2)│
+27 → Full bathroom 1 (3)│
+28 → Full bathroom 2 (2)│
+29 → Full bathroom 2 (3)│
+30 → Exterior 2         │
+31 → Exterior 3         │
+32 → Exterior 4         │
+33 → Pool 2             │
+34 → Pool 3             ┘
+```
+
+**Why the lead photo of each room comes first (01–09):** the gallery mosaic shows the
+first five photos, and the reference's mosaic shows five *different* spaces. Ordering
+lead-per-room first makes `photos.slice(0, 5)` produce a varied mosaic with no
+special-casing. The Photo Tour regroups by the `room` field, so this ordering costs the
+tour nothing.
+
+### 3.1 Lightbox opening index
+
+**The Lightbox opens at the clicked photo's index**, not at zero. Each photo carries its
+index into the flat array, and the Lightbox is addressed by that index:
+
+- Clicking the first tour photo → `1 / 34`
+- Clicking Living room's third photo (array index 10) → `11 / 34`
+
+Navigation is **clamped, never wrapping**: `←` at photo 1 stays at `1 / 34`, and at
+`34 / 34` the Next control is removed entirely.
 
 ---
 
-## 5. UI icons
+## 4. Image cropping analysis
 
-The single largest asset finding on the page.
+| Slot | Displayed AR | Master AR | Fit | Object-position | Cropped? |
+|---|---|---|---|---|---|
+| Gallery hero | 560:476 ≈ **1.18:1** | 1.5:1 | `cover` | 50% 50% | **Yes — ~21% of width** |
+| Gallery tiles 2–3 | 272:238 ≈ **1.14:1** | 1.5:1 | `cover` | 50% 50% | **Yes — ~24%** |
+| Gallery tiles 4–5 | 272:230 ≈ **1.18:1** | 1.5:1 | `cover` | 50% 50% | **Yes — ~21%** |
+| Sleeping arrangement | 319:212 = **1.5:1** | 1.5:1 | `cover` | 50% 50% | No |
+| Tour thumbnail | 146.3:96.2 ≈ **1.52:1** | 1.5:1 | `cover` | 50% 50% | Negligible |
+| Tour lead | 741.3:494 = **1.5:1** | 1.5:1 | `cover` | 50% 50% | No |
+| Tour paired | 366.65:244 = **1.5:1** | 1.5:1 | `cover` | 50% 50% | No |
+| **Lightbox** | box 1248 × 676 | any | **`contain`** | 50% 50% | **Never** |
+
+### 4.1 The two rules that matter
+
+1. **`cover` everywhere except the Lightbox, which is `contain`.** This is the only
+   fit change on the page. The Lightbox letterboxes against black so the full frame is
+   always visible — never crop there.
+2. **`object-position: 50% 50%` universally.** The reference applies no art direction
+   and no focal points. Do not vary it per image; that would be inventing behaviour.
+
+### 4.2 Images needing special treatment
+
+Only the **five gallery mosaic tiles** crop meaningfully — a 3:2 master is squeezed into
+roughly 1.14–1.18:1, removing **20–25% of the frame**, centred.
+
+**Practical guidance for whoever supplies the photos:** compose the five lead images
+(01–05) with subject matter centred and ~25% of slack around the edges. A photo with its
+subject near the left or right edge will lose it in the mosaic. Photos 06–34 are shown
+uncropped at 3:2 everywhere they appear, so they need no special composition.
+
+---
+
+## 5. Host and avatar assets
 
 | Property | Value |
 |---|---|
-| Count | **59 inline `<svg>` elements** on one listing page **[M]** |
-| Sprites / `<use>` | **Zero** — every icon is fully inlined, duplicated per instance **[M]** |
-| Total inline SVG markup | ≈ **48.9 KB** **[M]** |
-| Icon font | None **[M]** |
-| Image-based icons | None (except the search-pill PNG, §6) **[M]** |
+| Master | **1:1 square**, ≥ 240 × 240 |
+| Small slot | **40 × 40** (host strip), variant `im_w=120` |
+| Large slot | **88 × 88** (Meet your host), variant `im_w=240` |
+| Shape | Circular |
+| Border | None |
+| Crop | `object-fit: cover`, `50% 50%` |
+| Reused? | **Yes — one file serves both slots** at two variants |
 
-### 5.1 Grid and rendered sizes **[M]**
+**Implementation note.** In the reference the small avatar's `<img>` computes
+`border-radius: 0` and is clipped by a circular wrapper; the large one carries
+`border-radius: 50%` directly. Put the circle on a wrapper with `overflow: hidden` and
+both slots behave identically.
 
-Icons are authored on a **32-unit grid** (`viewBox="0 0 32 32"`) and scaled down. A minority
-use `0 0 16 16` and one uses `0 0 48 48`.
+**Accessibility note.** In every placement the person's name sits beside the avatar as
+real text, so the avatar should be **decorative** (`alt=""`, `aria-hidden`). A non-empty
+alt makes screen readers announce the name twice.
 
-| Rendered | Count | Typical use |
+**Fallback.** The reference serves a generated coloured placeholder for hosts without a
+photo. Reproduce with a CSS circle plus the initial — no asset needed.
+
+**Reviewer avatars** (5) behave like the small host avatar: 40 × 40, circular,
+decorative.
+
+**Recommendation:** **replace** (class D). Use original or licensed portraits; never
+reuse the reference's. Store locally.
+
+---
+
+## 6. Logo and brand assets
+
+| Property | Value |
+|---|---|
+| Type | **Inline `<svg>`**, not an image file |
+| `viewBox` | `0 0 3490 1080` (≈ 3.23:1) |
+| Rendered | **102 × 32**, at `x = 48`, vertically centred in the 96px header |
+| Geometry | **A single `<path>`** — glyph and wordmark in one path |
+| Markup size | ≈ 4.0 KB |
+| Colour | Brand pink; the `<svg>` element computes `fill: rgb(0,0,0)` with colour applied on the path |
+
+**Recommendation: recreate as an original mark (class C).** Do **not** reproduce the
+reference's path data — that is exactly the lift-and-shift the brief prohibits, and it
+would also be trademark misuse.
+
+Match only the **slot**, not the artwork: a single-path SVG at roughly 3.2:1, rendered
+102 × 32, left-aligned at a 48px gutter. An inline SVG component (not an image file) so
+it inherits colour and stays crisp at any DPR.
+
+---
+
+## 7. Icons
+
+| Property | Value |
+|---|---|
+| Count on one listing page | **59 inline `<svg>` elements** |
+| Sprites / `<use>` | **Zero** — every icon fully inlined and duplicated per instance |
+| Total inline SVG markup | ≈ **48.9 KB** |
+| Icon font | None |
+| Image-based icons | None |
+| Authoring grid | **32-unit** (`viewBox="0 0 32 32"`); a minority use `0 0 16 16` |
+
+### 7.1 Rendered sizes
+
+| Size | Count | Used for |
 |---|---|---|
 | **24 × 24** | 17 | Amenity rows, section icons |
 | 16 × 16 | 9 | Close, share, save, inline marks |
-| 12 × 12 | 3 | Lightbox prev / next chevrons |
-| 9 × 9 | 5 | Micro-glyphs, separators |
-| 8 × 8, 7 × 7 | 4 | Dots, tiny marks |
-| 102 × 32 | 1 | Logo |
+| 12 × 12 | 3 | Lightbox chevrons |
+| 9 × 9 and smaller | 10 | Micro-glyphs, dots |
 
-### 5.2 Two icon styles **[M]**
+### 7.2 Two styles
 
 | Style | Computed | Used for |
 |---|---|---|
-| **Stroke** | `fill: none; stroke: #222222; stroke-width: 4` (on the 32-unit grid = **12.5% of the box**) | Chevrons, close, share, heart, navigation |
-| **Fill** | `fill: #222222; stroke: none`, single `<path>` | Amenity icons |
+| **Stroke** | `fill: none; stroke: #222222; stroke-width: 4` (12.5% of the 32-unit box) | Chevrons, close, share, heart, navigation |
+| **Fill** | `fill: #222222; stroke: none`, single `<path>` | Amenity glyphs |
 
-Amenity icons are **solid single-path glyphs**, 24 × 24, ≈ 680 bytes of markup each. Stroke
-icons are ≈ 310 bytes each.
+### 7.3 Grouped icon list — all implementable with `lucide-react`
 
-### 5.3 Recommendation
+**Navigation / header**
+`Menu` · `UserRound` · `Globe` · `Search` · `ChevronDown`
 
-**Replace all 59 with an icon library.** Choose one with both stroke and solid variants on a
-24px grid — Lucide, Phosphor, or Heroicons (outline + solid). Match:
+**Listing**
+`Star` (rating, filled) · `Share` · `Heart` (save) · `KeyRound` (self check-in) ·
+`Sparkles` (highlights) · `Bed` (sleeping arrangements) · `MapPin` (location)
 
-- stroke icons at **stroke-width ≈ 1.5px** when rendered at 24px (12.5% of a 32-unit box
-  scaled to 24 ≈ 3px raw, which reads as a ~1.5–2px visual weight — tune by eye)
-- solid icons for amenities
-- `currentColor` so a single `#222222` text colour drives everything
+**Gallery / overlays**
+`LayoutGrid` (Show all photos) · `X` (close) · `ChevronLeft` · `ChevronRight`
 
-Prefer a **sprite or component import** over Airbnb's inline duplication — 48.9 KB of
-repeated markup is a cost to avoid, not a pattern to copy.
+**Booking**
+`ChevronDown` (guest field) · `Minus` · `Plus` (guest steppers) ·
+`ChevronLeft` / `ChevronRight` (calendar months)
+
+**Amenities**
+`CookingPot` (kitchen) · `Wifi` · `Car` (parking) · `Waves` (pool) · `PawPrint` (pets) ·
+`Tv` · `WashingMachine` · `Snowflake` (air conditioning) · `Droplets` (hot water) ·
+`Wind` (hairdryer) · `Bath` (toiletries) · `Package` (essentials) · `Shirt`
+(hangers / iron) · `Laptop` (workspace) · `Sun` (balcony) · `BellRing` (alarms) ·
+`Flame` (heating)
+
+**Footer**
+`Globe` (language) — currency is text, not an icon
+
+**Total: 36 named icons** covering every glyph on the page.
+
+### 7.4 Recommendation
+
+**Use `lucide-react` behind a single `<Icon name="…" />` component (class C).** Reasons:
+
+- The reference's icons are proprietary and cannot be reused regardless.
+- Its inlining pattern costs **48.9 KB of duplicated markup** with zero sprite reuse —
+  that is a cost of its build, not a design intent worth copying.
+- A library import is tree-shaken; only the icons actually used ship.
+
+Drive colour from `currentColor` so the single `#222222` text token controls every
+glyph. Use solid variants for amenities, stroke variants elsewhere, at ~1.5px visual
+weight when rendered at 24px.
+
+**Never use image files for standard UI icons.**
 
 ---
 
-## 6. Map / location visuals
+## 8. Map / location visual
 
 | Property | Value |
 |---|---|
-| Provider | **Google Maps** — `maps.googleapis.com`, `maps.gstatic.com` **[M]** |
-| Render surface | **`<canvas>` 1120 × 480** (vector tiles, not raster tile images) **[M]** |
-| Container | 1120 × 480, `border-radius: 20px`, `overflow: hidden` **[M]** |
-| Markers | **`data:image/svg+xml` URIs** inlined — `viewBox` `0 0 18 18`, `0 0 23 38`, `0 0 24 38`, `0 0 40 50` **[M]** |
-| Pointer / tail | **Pure CSS**: `linear-gradient(135deg, rgba(0,0,0,0) 50%, rgb(34,34,34) 50%)` — a gradient triangle, no image **[M]** |
-| Secondary font | Roboto (`fonts.gstatic.com`) — pulled in by Maps, not by the page **[M]** |
+| Provider | **Google Maps** (`maps.googleapis.com`, `maps.gstatic.com`) |
+| Render surface | **`<canvas>` 1120 × 480** — vector tiles, not raster tile images |
+| Container | 1120 × 480, `border-radius: **20px**`, `overflow: hidden` |
+| Markers | **`data:image/svg+xml` URIs** inlined (`viewBox` `0 0 18 18`, `0 0 23 38`, `0 0 24 38`, `0 0 40 50`) |
+| Pointer / tail | **Pure CSS**: `linear-gradient(135deg, rgba(0,0,0,0) 50%, rgb(34,34,34) 50%)` |
+| Secondary font | Roboto, pulled in **by Maps**, not by the page |
 
-**Recommendation.** The map is the one place worth *not* matching implementation. Options in
-order of cost:
+**Is interaction required? No.** Pan, zoom and marker interaction were **[N] never
+exercised** on the reference. Nothing observed depends on the map being live.
 
-1. **Static image** — a 1120 × 480 map export at 20px radius. Zero JS, visually identical at
-   rest. Loses pan/zoom (which was **[N]** never exercised anyway).
-2. **Open-source tiles** — MapLibre/Leaflet with OSM. Interactive, no API key.
-3. **Google Maps JS** — matches exactly, needs a billed key.
+### Recommendation — simplest approach that reproduces the appearance
 
-Markers and the pointer tail are reproducible as inline SVG + a CSS gradient regardless.
+**A static map image (class C/B).** A single 1120 × 480 export at 20px radius is
+visually identical at rest, needs no API key, no JS, and no billing. Give it fixed
+intrinsic dimensions so it contributes zero layout shift, mark it decorative
+(`alt=""`, `aria-hidden`) and let the address text carry the meaning.
+
+Escalate only if genuinely needed:
+
+1. **Static image** — recommended.
+2. **MapLibre + OpenStreetMap** — interactive, no key, no billing.
+3. **Google Maps JS** — matches exactly, requires a billed key.
+
+The marker and pointer are reproducible as inline SVG + a CSS gradient in all three.
+
+> **Note on the 20px radius.** The map is the only 20px radius on the page — gallery and
+> booking card are 12px, modals 32px. Do not unify them.
 
 ---
 
-## 7. Fonts
+## 9. Fonts
 
-| # | Asset | Detail |
-|---|---|---|
-| 13 | **`AirbnbCerealVF_W_Wght.woff2`** | **A single variable font file**, weight axis, served from `a0.muscache.com/airbnb/static/airbnb-dls-web/build/fonts/cereal-variable/` **[M]** |
-| 14 | `Roboto` woff2 | From `fonts.gstatic.com`, loaded **by Google Maps**, not the page **[M]** |
+| Property | Value |
+|---|---|
+| Family | **`Airbnb Cereal VF`**, falling back to `Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif` |
+| Delivery | **A single variable woff2**, weight axis (`AirbnbCerealVF_W_Wght.woff2`) |
+| Is it a web font? | **Yes**, self-hosted from the CDN |
+| Total font requests | **3** for the whole page (one is Roboto, loaded by Maps) |
+| Italic | **Declared but never loaded** — the page uses no italic |
 
-**Loaded faces [M]:**
+**Loaded faces:**
 
 | Family | Style | Status |
 |---|---|---|
 | Airbnb Cereal VF | normal | **loaded** |
-| Airbnb Cereal VF | italic | **unloaded** — italic is never used |
-| Airbnb Cereal VF | normal (2nd face) | unloaded |
+| Airbnb Cereal VF | italic | **unloaded** |
 
-**Only three font requests for the entire page**, and effectively **one file** does all the
-typographic work — every weight from 400 to 700 comes from the same variable woff2.
+**Weights actually used:** 400, 500, 700 — all from the one variable file.
 
-**Action.** Airbnb Cereal is proprietary and cannot be used. Substitute a free **variable**
-geometric sans — Inter Variable or Manrope Variable — preserving:
+```text
+Font:      Airbnb Cereal VF (proprietary) → substitute Inter Variable or Manrope Variable
+Weights:   400 (body), 500 (headings, buttons), 700 (host name only)
+Headings:  h1 26/30 w500 · section h2 22/26 w500, letter-spacing −0.44px
+Body:      16/20 w400 · base 14/18 w400 · micro 12/16 w500
+Buttons:   16/20 w500 (large) · 12/16 w500 (compact)
+```
 
-- one variable file, weight axis only
-- **no italic face** (the reference never loads one)
-- the declared stack shape: `"<Your Font>", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif`
+### Recommendation
+
+**Airbnb Cereal is proprietary and must not be copied** (class D). Substitute a free
+**variable** geometric sans — **Inter Variable** or **Manrope Variable** — preserving:
+
+- **one variable file**, weight axis only
+- **no italic face**
+- the stack shape: `"<Your Font>", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif`
+- `font-display: swap` and a `<link rel="preload">`
+
+**Does a system fallback materially affect fidelity?** **Yes, noticeably.** Cereal is a
+geometric sans with a large x-height; the system stack (Segoe UI on Windows, SF on macOS)
+has different letterforms and metrics. Because the measured type scale is applied with
+explicit `font-size`/`line-height`, *layout* stays correct and geometry checks still
+pass — but glyph shapes and text colour-on-page differ visibly. Ship a real variable
+font; do not rely on the fallback.
+
+> **Current state of this repo:** `--font-sans` names `Inter Variable`, but **no
+> `@font-face` exists and zero font requests are made** — the app currently renders in
+> the system fallback. Supplying the woff2 (§15) closes this gap.
 
 ---
 
-## 8. Other visible assets
+## 10. Asset sources
 
-| # | Asset | Location | Natural | Rendered | Fit | Notes |
-|---|---|---|---|---|---|---|
-| 15 | Search-pill illustration | Header search bar | **240 × 216** PNG | **48 × 48** | **`fill`** | `/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-search-bar-icons/…png` — the only decorative raster on the page. Note `object-fit: fill` **distorts** a 240×216 source into a 48×48 square **[M]** |
-| 16 | Platform profile asset | Header/menu | PNG | — | — | `AirbnbPlatformAssets-UserProfile` **[M]** |
-| 17 | Avatar fallback | Host slots | Generated | 40 / 88 | — | `/im/Portrait/Avatars/v2/green` — coloured placeholder **[M]** |
+### A — Can use directly
+*(none)* — no reference asset is appropriate to reuse as-is.
 
-### 8.1 Excluded — tracking pixels **[M]**
+### B — Provide locally
+| Asset | Note |
+|---|---|
+| 34 property photographs | Your own or licensed |
+| Host avatar | Your own or licensed |
+| Reviewer avatars (≤5) | Optional; can fall back to CSS initials |
+| Static map export | Or swap for a map library |
+| Variable font woff2 | Inter/Manrope, open licence |
 
-74 image responses were recorded, but many are 1×1 beacons with **no visual role**. Hosts
-seen: `tr.snapchat.com`, `www.facebook.com`, `ct.pinterest.com`, `googleads.g.doubleclick.net`,
-`ad.doubleclick.net`, `analytics.google.com`, `www.google.com`, `www.google.co.in`,
-`verifi.pdscrb.com`. Content types include `text/plain`, `text/html`, `image/gif`, `image/bmp`.
+### C — Recreate (no file needed)
+Logo · all 36 UI icons · avatar fallback · map marker · map pointer · CTA gradient ·
+search-submit gradient · gallery corner rounding · card borders · dividers · card and
+modal shadows · star/rating glyph · search-pill illustration · favicon
 
-**None of these are assets.** Exclude them entirely.
+### D — Replace with original equivalents ⚠
+| Asset | Why |
+|---|---|
+| **All 34 property photographs** | Airbnb's licensed imagery |
+| **Host and reviewer avatars** | Images of real people |
+| **Airbnb Cereal VF** | Proprietary typeface |
+| **Airbnb logo / Rausch wordmark** | Trademark |
+| **Airbnb icon set** | Proprietary artwork |
+
+**Class D is the plagiarism boundary.** Match dimensions, aspect ratios, crop behaviour
+and slot geometry — never the artwork.
+
+### Excluded entirely — tracking pixels
+Of the 74 image responses, many are 1×1 beacons with no visual role:
+`tr.snapchat.com`, `www.facebook.com`, `ct.pinterest.com`, `googleads.g.doubleclick.net`,
+`ad.doubleclick.net`, `analytics.google.com`, `verifi.pdscrb.com`. Content types include
+`text/plain`, `text/html`, `image/gif`, `image/bmp`. **None are assets.**
 
 ---
 
-## 9. Assets recreatable without image files
+## 11. Local asset strategy
 
-This is the practical output of the phase.
+```text
+client/
+└── public/
+    └── assets/
+        ├── gallery/
+        │   ├── gallery-01-living-room.webp
+        │   ├── gallery-02-full-kitchen.webp
+        │   ├── gallery-03-dining-area.webp
+        │   ├── gallery-04-bedroom-1.webp
+        │   ├── gallery-05-bedroom-2.webp
+        │   ├── gallery-06-full-bathroom-1.webp
+        │   ├── gallery-07-full-bathroom-2.webp
+        │   ├── gallery-08-exterior.webp
+        │   ├── gallery-09-pool.webp
+        │   └── … through gallery-34-pool.webp
+        ├── host/
+        │   ├── host-01.webp
+        │   └── reviewer-01.webp … reviewer-05.webp
+        ├── map/
+        │   └── location-candolim.webp
+        └── fonts/
+            └── inter-variable.woff2
+```
 
-| Reference asset | Replace with | Why |
+`icons/` is deliberately **absent**: icons come from `lucide-react`, and a directory of
+icon files would invite the image-per-icon pattern this document argues against.
+
+**Naming.** `gallery-NN-room-name.webp` — the ordinal preserves canonical order
+(§3) and the room slug keeps the set self-documenting and greppable. Avoid
+`image1.jpg` / `photo_final_v2.jpg`.
+
+Files live in `public/` because they are referenced by URL from API data rather than
+imported by the bundler.
+
+---
+
+## 12. Image format recommendations
+
+| Category | Format | Reasoning |
 |---|---|---|
-| **All 59 UI icons** | Icon library (Lucide / Phosphor / Heroicons), 24px grid, `currentColor` | Already pure vector; a library removes 48.9 KB of duplicated inline markup **[M]** |
-| **Logo** | Your own single-path SVG, 102 × 32 | Must be original anyway **[M]** |
-| **Primary CTA gradient** | `linear-gradient(to right, #E61E4D 0%, #E31C5F 50%, #D70466 100%)` | Already CSS in the reference **[M]** |
-| **Search submit button** | `radial-gradient(circle, #FF385C 0%, #E61E4D 27.5%, #E31C5F 40%, #D70466 57%…)` | Already CSS **[M]** |
-| **Map pointer / tail** | `linear-gradient(135deg, transparent 50%, #222222 50%)` | Already CSS **[M]** |
-| **Map markers** | Inline SVG (18×18, 24×38, 40×50) | Already data-URI SVG **[M]** |
-| **Avatar fallback** | CSS circle + initial, or a generated colour block | Reference uses a generated endpoint **[M]** |
-| **Gallery corner rounding** | 12px-radius wrapper + `overflow: hidden` | No masks or clip-paths involved **[M]** |
-| **Card borders / dividers** | `1px solid #DDDDDD` | No image borders **[M]** |
-| **Card + modal shadows** | `0 6px 16px rgba(0,0,0,.12)`, `0 8px 28px rgba(0,0,0,.28)` | Pure CSS **[M]** |
-| **Star / rating glyph** | Icon library or `★` | Vector **[M]** |
-| **Search-pill illustration** | An icon from the same library | A 48×48 decorative PNG earns no raster request **[M]** |
-| **Map (optional)** | Static 1120 × 480 export, or MapLibre + OSM | Interactivity was never exercised **[N]** |
+| **Property photographs** | **WebP** (AVIF optional, JPEG fallback) | Photographic, no transparency. The reference serves AVIF/WebP. WebP has universal modern support; AVIF is smaller but slower to encode |
+| **Host / reviewer avatars** | **WebP** | Same, small |
+| **Map (static)** | **WebP** | Flat colour with text; compresses well. **PNG** if the export shows banding |
+| **Logo** | **SVG** | Vector, must stay crisp at any DPR, inherits `currentColor` |
+| **Icons** | **SVG** via `lucide-react` | Never raster |
+| **Favicon** | **SVG** | One file, scales, tiny |
 
-**Only two categories genuinely require image files: property photography (34 per listing)
-and the host avatar (1).** Everything else on this page is vector, CSS, or a font.
+### Quality guidance
 
-### 9.1 Total decorative raster footprint
-
-| | Reference | Achievable |
-|---|---|---|
-| CSS `background-image` declarations | **2 — both gradients** | 2 gradients |
-| Decorative raster images | **1** (48 × 48 search PNG) | **0** |
-
-The page has **no background textures, no sprite sheets, no decorative imagery**. Any such
-asset in an implementation is a deviation from the reference.
+- Encode WebP at **quality 80–85**. Below ~75, gradients and skin tones visibly band.
+- **Do not over-compress.** The brief is visual reproduction; a smaller file that
+  visibly differs from the reference is a failure, not an optimisation.
+- Always ship a **JPEG fallback** via `<picture>` if you must support very old browsers.
+- Generate the width ladder **120 / 240 / 480 / 720 / 1200 / 1440** from a
+  ≥ 1440 × 960 master. Never upscale.
 
 ---
 
-## 10. Production checklist
+## 13. Performance considerations
 
-To build one listing page you need:
+### Load immediately (eager)
 
-| # | Item | Qty | Spec |
-|---|---|---|---|
-| 1 | Property photographs | **34** | **3:2**, master ≥ 1440 × 960 |
-| 2 | Width variants per photo | 6 | **120 / 240 / 480 / 720 / 1200 / 1440** |
-| 3 | Formats | 2 | **AVIF + WebP**, JPEG fallback |
-| 4 | Room grouping metadata | 9 groups | Living room, Full kitchen, Dining area, Bedroom 1–2, Full bathroom 1–2, Exterior, Pool — drives the Photo Tour |
-| 5 | Host avatar | 1 | **1:1**, ≥ 240 × 240 |
-| 6 | Avatar fallback | 1 | CSS/generated |
-| 7 | Logo | 1 | Original SVG, 102 × 32 |
-| 8 | Icon set | ~25 unique | 24px grid, stroke + solid |
-| 9 | Variable font | 1 | Weight axis, **no italic** |
-| 10 | Map | 1 | Static 1120 × 480 @ 20px radius, or a map library |
+| Asset | Why |
+|---|---|
+| **All 5 gallery mosaic images** | **Above the fold.** The reference loads every gallery image eagerly (`loading: auto`) |
+| Hero (photo 01) | Add `fetchpriority="high"` — it is the LCP element (the reference tags it `elementtiming="LCP-target"`) |
+| Variable font | `<link rel="preload">` + `font-display: swap` |
 
-**Per-photo budget:** ≈ 13.6 KB average at the delivered variant **[M]**. A 34-photo listing
-therefore ships roughly 70 KB above the fold (5 gallery images) and defers the rest.
+> **Common mistake:** lazy-loading gallery tiles 2–5 because "only the hero matters".
+> They are above the fold; lazy-loading them defers them behind the browser's heuristic
+> and can hand LCP to a *secondary* tile. This was a real defect in this project, caught
+> by measurement and fixed.
+
+### Lazy load
+
+| Asset | Why |
+|---|---|
+| Photo Tour body photos (all 34) | Behind a modal; the reference loads ~10 of 34 on open |
+| Tour category thumbnails | Below the visible strip |
+| Sleeping-arrangement images | Below the fold |
+| Reviewer avatars | Below the fold |
+| Large host avatar (88px) | Below the fold |
+| Static map | Below the fold |
+
+### Should gallery images be lazy loaded?
+
+**No for the five mosaic tiles** — above the fold, and the reference loads them eagerly.
+**Yes for everything else.**
+
+### Thumbnails
+
+**Yes — use smaller variants.** Tour category thumbnails render at 146 × 96; serving a
+1440px master there wastes ~95% of the bytes. Request `im_w=480`.
+
+### Should the Lightbox reuse the same images?
+
+**Yes — same files, larger variant (`im_w=1440`).** Never a separate asset set.
+
+### Would preloading the next image help?
+
+**Yes, measurably.** Warm `index ± 1` with `new Image()` when the Lightbox index
+changes. Without it, rapid next/previous flashes an empty frame mid-swap. Also avoid
+keying the `<img>` by photo id — that remounts the element on every move and guarantees
+the blank frame. Reuse one element and let the preloaded source swap in.
+
+### Layout stability
+
+Give **every** image explicit `width`/`height` attributes matching its intrinsic size.
+Measured result with this in place: **CLS = 0**, including while the loading skeleton
+swaps to content under a slow API.
 
 ---
 
-## 11. Not observed
+## 14. Final asset checklist
+
+### Required local assets
+
+```text
+[ ] gallery-01-living-room.webp      (hero — compose centred, ~25% edge slack)
+[ ] gallery-02-full-kitchen.webp     (mosaic tile 2 — cropped)
+[ ] gallery-03-dining-area.webp      (mosaic tile 3 — cropped)
+[ ] gallery-04-bedroom-1.webp        (mosaic tile 4 — cropped)
+[ ] gallery-05-bedroom-2.webp        (mosaic tile 5 — cropped)
+[ ] gallery-06-full-bathroom-1.webp
+[ ] gallery-07-full-bathroom-2.webp
+[ ] gallery-08-exterior.webp
+[ ] gallery-09-pool.webp
+[ ] gallery-10 … gallery-34.webp     (25 more, grouped by room)
+[ ] host-01.webp                     (1:1 square, ≥ 240×240)
+[ ] reviewer-01 … reviewer-05.webp   (optional — CSS initials otherwise)
+[ ] location-candolim.webp           (static map, 1120 × 480)
+[ ] inter-variable.woff2             (or manrope-variable.woff2)
+```
+
+### Can be recreated
+
+```text
+[x] Logo / wordmark            original single-path SVG, 102 × 32
+[x] Heart (save) icon          lucide-react
+[x] Share icon                 lucide-react
+[x] Navigation icons           Menu, UserRound, Globe, Search, ChevronDown
+[x] Gallery icons              LayoutGrid, X, ChevronLeft, ChevronRight
+[x] Booking icons              Minus, Plus, ChevronDown, calendar chevrons
+[x] All 17 amenity icons       lucide-react solid variants
+[x] Star / rating glyph        lucide-react (filled)
+[x] Map marker                 inline SVG
+[x] Map pointer / tail         CSS linear-gradient(135deg, …)
+[x] Avatar fallback            CSS circle + initial
+[x] CTA gradient               linear-gradient(to right, #E61E4D, #E31C5F, #D70466)
+[x] Search-submit gradient     radial-gradient(circle, #FF385C, #E61E4D, #E31C5F, #D70466)
+[x] Search-pill illustration   an icon from the same library
+[x] Gallery corner rounding    12px wrapper + overflow:hidden
+[x] Borders / dividers         1px solid #DDDDDD
+[x] Card + modal shadows       0 6px 16px rgba(0,0,0,.12) / 0 8px 28px rgba(0,0,0,.28)
+[x] Favicon                    inline SVG
+```
+
+### Need original replacement ⚠
+
+```text
+[!] All 34 property photographs   Airbnb's licensed imagery
+[!] Host avatar                   image of a real person
+[!] Reviewer avatars              images of real people
+[!] Airbnb Cereal VF              proprietary typeface
+[!] Airbnb logo / wordmark        trademark
+[!] Airbnb icon set               proprietary artwork
+```
+
+---
+
+## 15. Developer instructions
+
+### What I need to provide manually
+
+```text
+gallery-01-living-room.webp
+Recommended size: 1440 × 960
+Aspect ratio: 3:2
+Format: WebP (q 80–85), JPEG fallback
+Used: Listing hero (cropped to 560×476) + Photo Tour + Lightbox
+Note: LCP element. Compose centred — ~25% of the frame is cropped in the mosaic.
+
+gallery-02-full-kitchen.webp
+gallery-03-dining-area.webp
+gallery-04-bedroom-1.webp
+gallery-05-bedroom-2.webp
+Recommended size: 1440 × 960
+Aspect ratio: 3:2
+Format: WebP
+Used: Listing mosaic tiles 2–5 (cropped to 272×238 / 272×230) + Tour + Lightbox
+Note: ~20–25% cropped. Keep subjects away from the edges.
+
+gallery-06 … gallery-34  (29 files)
+Recommended size: 1440 × 960
+Aspect ratio: 3:2
+Format: WebP
+Used: Photo Tour + Lightbox only (never cropped — shown at full 3:2)
+Grouping: 9 rooms — Living room (5), Full kitchen (4), Dining area (3),
+          Bedroom 1 (5), Bedroom 2 (4), Full bathroom 1 (3),
+          Full bathroom 2 (3), Exterior (4), Pool (3)
+
+host-01.webp
+Recommended size: 240 × 240
+Aspect ratio: 1:1
+Format: WebP
+Used: Host strip (40×40) + Meet your host (88×88), both circular
+
+reviewer-01 … reviewer-05.webp        [optional]
+Recommended size: 120 × 120
+Aspect ratio: 1:1
+Format: WebP
+Used: Reviews section, 40×40 circular
+Note: omit and fall back to CSS initials if you prefer
+
+location-candolim.webp
+Recommended size: 2240 × 960 (2× for retina)
+Aspect ratio: 7:3
+Format: WebP (PNG if banding appears)
+Used: Location section, displayed 1120 × 480 at 20px radius
+Note: decorative — the address text carries the meaning
+
+inter-variable.woff2
+Variable font, weight axis 400–700, no italic
+Format: woff2
+Used: entire page
+Note: preload it; the repo currently names a font it never loads
+```
+
+**Also required:** generate the width ladder **120 / 240 / 480 / 720 / 1200 / 1440** for
+every photograph and avatar from the masters above.
+
+### What the coding agent can create
+
+- The **logo** as an original single-path SVG component (102 × 32)
+- **All 36 icons** via `lucide-react` behind one `<Icon name="…" />` component
+- **Both brand gradients**, all borders, dividers, shadows and radii in Tailwind/CSS
+- The **avatar fallback** (CSS circle + initial)
+- The **map marker and pointer** as inline SVG + CSS gradient
+- The **favicon** as an inline SVG
+- **Responsive image plumbing**: variant selection from the width ladder, eager/lazy
+  policy, `width`/`height` for CLS, and Lightbox neighbour preloading
+- The **placeholder set** used during development, so the page is buildable and testable
+  before real photography lands *(this repo currently ships 76 generated 3:2 SVG
+  placeholders for exactly this reason — replace them, do not ship them)*
+
+### What should NOT be copied
+
+```text
+✘ Any React component, hook, CSS file, class name or build config from the reference
+✘ The reference's SVG path data — logo or icons
+✘ Airbnb Cereal VF, or any proprietary font file
+✘ Property photographs, host photos or reviewer photos from the reference
+✘ The reference's project structure or file naming
+✘ Airbnb's trademarks, wordmark or brand colours presented as our own brand
+✘ Its inline-SVG-per-icon pattern (48.9 KB of duplication — a build artefact, not a design)
+✘ CDN URLs pointing at a0.muscache.com — hotlinking someone else's assets
+```
+
+**What may legitimately be reproduced:** dimensions, aspect ratios, spacing, crop
+behaviour, `object-fit`/`object-position`, colour values, type scale, transition
+timings, and interaction semantics. Those are observable characteristics of the
+interface, and reproducing them from measurement — with our own code and our own
+assets — is the assignment.
+
+---
+
+## 16. Not observed
 
 | # | Item | Status |
 |---|---|---|
-| 1 | Exact `im_w` for the Photo Tour category thumbnails | Inferred from the ladder **[N]** |
-| 2 | DPR 2 / retina variants | Only DPR 1 was tested — the ladder implies 2× is served by doubling `im_w` **[N]** |
-| 3 | Video assets | 6 `media` responses were recorded but not identified **[N]** |
-| 4 | Map interaction assets (pan/zoom tiles) | Map was never interacted with **[N]** |
-| 5 | Responsive image variants | Only 1440px was measured; mobile likely uses 480/720 **[N]** |
-| 6 | Placeholder / blur-up strategy | An `rgba(34,34,34,0.10)` tint was seen as a background but the loading sequence was not traced **[N]** |
-| 7 | Icon licence/provenance | Airbnb's icons are proprietary; a library substitute is assumed **[N]** |
+| 1 | Exact `im_w` for tour category thumbnails | Inferred from the ladder **[N]** |
+| 2 | DPR 2 / retina variants | Only DPR 1 tested; the ladder implies 2× doubles `im_w` **[N]** |
+| 3 | Video assets | 6 `media` responses recorded but not identified **[N]** |
+| 4 | Map interaction assets (pan/zoom tiles) | Map never interacted with **[N]** |
+| 5 | Responsive image variants | Only 1440px measured; mobile likely uses 480/720 **[N]** |
+| 6 | Blur-up / placeholder strategy | An `rgba(34,34,34,0.10)` tint was seen as a background, but the loading sequence was not traced **[N]** |
+| 7 | Icon licence/provenance | Airbnb's are proprietary; a library substitute is assumed **[N]** |
